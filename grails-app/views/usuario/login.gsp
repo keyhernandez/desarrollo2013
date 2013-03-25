@@ -6,7 +6,22 @@
 
     <title>'Retro shop SK' </title>
     <meta charset="utf-8">
-
+    <script language="JavaScript"><!--
+    function show(object) {
+    if (document.layers && document.layers[object])
+    document.layers[object].visibility = 'visible';
+    else if (document.all) {
+    document.all[object].style.visibility = 'visible';
+    document.all[object].style.zIndex = 100;
+    }
+    }
+    function hide(object) {
+    if (document.layers && document.layers[object])
+    document.layers[object].visibility = 'hidden';
+    else if (document.all)
+    document.all[object].style.visibility = 'hidden';
+    }
+    //--></script>
     <!-- Link fonth -->
     <link href='http://fonts.googleapis.com/css?family=Yellowtail' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
@@ -143,20 +158,23 @@
     </div>
   </nav>
 
-  <section>
-    <h3>Login</h3>
-    <openid:hasLoginError>
-      <div class="errors">
-        <ul>
-          <li><openid:renderLoginError /></li>
-        </ul>
-      </div>
-    </openid:hasLoginError>
-    <openid:form success="[action:'loggedin']">
-      <openid:input size="40" value="https://www.google.com/accounts/o8/id" /> 
-      <br/>
-      <g:submitButton name="login" value="Login" />
-    </openid:form>
+  <section id="banners">
+    <center>
+      <h3>Login</h3>
+      <openid:hasLoginError>
+        <div class="errors">
+          <ul>
+            <li><openid:renderLoginError /></li>
+          </ul>
+        </div>
+      </openid:hasLoginError>
+
+      <openid:form success="[action:'loggedin']" onshow="hide('redic')">
+        <openid:input id="redic" size="40" value="https://www.google.com/accounts/o8/id" hidden=""/> 
+        <br/>
+        <g:submitButton name="login" value="Login" />
+      </openid:form>
+    </center>
   </section>
 
   <footer><!-- Define the footer section of the page -->

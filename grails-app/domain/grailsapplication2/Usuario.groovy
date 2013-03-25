@@ -14,6 +14,17 @@ String fechaNac;
 String fechaRegistro;
 
     static hasMany=[compras:Compra]
+    
     static constraints = {
+        compras(nullable:true,blank:true)
+        nombre(nullable:false,blank:false)
+        apellido(nullable:false,blank:false)
+        cedula(nullable:false,blank:false)
+        correo (nullable:false,blank:false,email:true,unique:true)
+        pais (nullable:false,blank:false)
+        ciudad (nullable:false,blank:false)
+        codpostal (nullable:false,blank:false)
+        direccion (nullable:false,blank:false)
+        fechaNac (nullable:false,blank:false)
     }
 }

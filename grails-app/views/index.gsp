@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="es"><head>
+<html lang="es">
+  <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 
-    <title>'Retro shop SK' </title>
+    <title>Retro shop SK</title>
     <meta charset="utf-8">
 
     <!-- Link fonth -->
@@ -49,7 +50,7 @@
         <div class="head_menus">
             <div class="menu"><!-- Define the topest menu -->
                 <ul>
-                    <li><a href="#">Home</a></li>
+                    <li><a href="${createLink(uri: '/')}">Home</a></li>
                     <li><a href="#">Novedades</a></li>
                     <li><a href="#">Featured</a></li>
                     <li><a href="#">Top sells</a></li>
@@ -67,7 +68,14 @@
               </g:form> 
              <!-- <g:link controller="Usuario" action="list">Inicia Sesion</g:link>-->
            </div>
-
+          
+          <div class="box_currencies2"><!-- Define currency switcher -->
+            <g:form controller="Usuario">
+              
+                  <g:actionSubmit value="Registro" action="create" /> 
+              </g:form> 
+             <!-- <g:link controller="Usuario" action="list">Inicia Sesion</g:link>-->
+           </div>
             <div class="search"><!-- Define the search element -->
                 <form method="get" action="#">
                     <input type="text" onfocus="if(this.value =='Search' ) this.value=''" onblur="if(this.value=='') this.value='Search'" maxlength="300" size="10" value="Search" name="s">
@@ -77,7 +85,7 @@
         </div>
 
         <div class="logo"><!-- Define the logo element -->
-            <a href="#">
+            <a href="${createLink(uri: '/')}">
                 <h1>Retro Shop SK</h1>
                 <h3>Susana - Keyla</h3>
             </a>

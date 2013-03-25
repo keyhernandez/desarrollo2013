@@ -21,13 +21,20 @@ class UsuarioController {
 
     def save() {
         def usuarioInstance = new Usuario(params)
+        usuarioInstance.fechaRegistro=new Date().format("dd/MM/yyyy")
         if (!usuarioInstance.save(flush: true)) {
             render(view: "create", model: [usuarioInstance: usuarioInstance])
             return
         }
-
+        sendMail{
+            to "kmhernandez.11@est.ucab.edu.ve"
+            from "admin@retro.com"
+            subject "Bienvenido a Retro Shop - Activa tu Cuenta"
+            html "Te has registrado en Retro Shop! \n Para comenzar, haz click en el siguiente link"
+        }
         flash.message = message(code: 'default.created.message', args: [message(code: 'usuario.label', default: 'Usuario'), usuarioInstance.id])
-        redirect(action: "show", id: usuarioInstance.id)
+        redirect(action: "activar")
+
     }
 
     def show(Long id) {
@@ -63,7 +70,7 @@ class UsuarioController {
         if (version != null) {
             if (usuarioInstance.version > version) {
                 usuarioInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                          [message(code: 'usuario.label', default: 'Usuario')] as Object[],
+                    [message(code: 'usuario.label', default: 'Usuario')] as Object[],
                           "Another user has updated this Usuario while you were editing")
                 render(view: "edit", model: [usuarioInstance: usuarioInstance])
                 return
@@ -100,6 +107,9 @@ class UsuarioController {
         }
     }
     def login = { session.usuario=null;
+        
     }
-def loggedin = { redirect(uri:'/') }
+    def loggedin = { redirect(uri:'/') }
+
+   
 }

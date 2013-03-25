@@ -2,7 +2,7 @@
 <html lang="es"><head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 
-    <title>'Retro shop SK' </title>
+    <title><g:layoutTitle default="Retro shop SK"/> </title>
     <meta charset="utf-8">
 
     <!-- Link fonth -->
@@ -43,14 +43,15 @@
     <!--[if lt IE 9]>
     <script type="text/javascript" src="js/html5.js"></script>
     <![endif]-->
-</head>
+    <g:layoutHead />
+  </head>
 <body>
-
+    
     <header><!-- Define the header section of the page -->
         <div class="head_menus">
             <div class="menu"><!-- Define the topest menu -->
                 <ul>
-                    <li><a href="#">Home</a></li>
+                    <li><a href="${createLink(uri: '/')}">Home</a></li>
                     <li><a href="#">Novedades</a></li>
                     <li><a href="#">Featured</a></li>
                     <li><a href="#">Top sells</a></li>
@@ -76,7 +77,7 @@
         </div>
 
         <div class="logo"><!-- Define the logo element -->
-            <a href="#">
+            <a href="${createLink(uri: '/')}">
                 <h1>Retro Shop SK</h1>
                 <h3>Susana - Keyla</h3>
             </a>
@@ -140,8 +141,15 @@
             </ul>
         </div>
     </nav>
-
-
+  <div id="left">
+  <g:pageProperty name="page.left1"/>
+  <g:pageProperty name="page.left2"/>
+  </div>
+  <div id="right">
+  <g:pageProperty name="page.right1"/>
+  <g:pageProperty name="page.right2"/>
+  </div>
+<g:layoutBody />
     <footer><!-- Define the footer section of the page -->
         <div>
             <ul>
