@@ -15,6 +15,12 @@ class ProductoController {
         [productoInstanceList: Producto.list(params), productoInstanceTotal: Producto.count()]
     }
 
+    def categorias(Integer max, String categoria){
+        params.max = Math.min(max ?: 10, 100)
+        def productos= Producto.executeQuery("from Producto where categoria= ?", [categoria])
+        println(productos)
+        [productoInstanceList : productos, productoInstanceTotal:Producto.count()]
+    }
     def create() {
         [productoInstance: new Producto(params)]
     }
@@ -63,7 +69,7 @@ class ProductoController {
         if (version != null) {
             if (productoInstance.version > version) {
                 productoInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                          [message(code: 'producto.label', default: 'Producto')] as Object[],
+                    [message(code: 'producto.label', default: 'Producto')] as Object[],
                           "Another user has updated this Producto while you were editing")
                 render(view: "edit", model: [productoInstance: productoInstance])
                 return
@@ -98,5 +104,10 @@ class ProductoController {
             flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'producto.label', default: 'Producto'), id])
             redirect(action: "show", id: id)
         }
+    }
+    def showImage = {
+        def imagen = Producto.get( params.id )
+        response.outputStream << imagen.screenshot
+        response.outputStream.flush()
     }
 }

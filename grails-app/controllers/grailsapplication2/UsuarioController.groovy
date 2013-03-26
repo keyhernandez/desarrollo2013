@@ -30,10 +30,10 @@ class UsuarioController {
             to "kmhernandez.11@est.ucab.edu.ve"
             from "admin@retro.com"
             subject "Bienvenido a Retro Shop - Activa tu Cuenta"
-            html "Te has registrado en Retro Shop! \n Para comenzar, haz click en el siguiente link"
+            html "Te has registrado en Retro Shop! \n Para comenzar, haz click en el siguiente link  http://localhost:7070/GrailsApplication2/usuario/show/$usuarioInstance.id"
         }
-        flash.message = message(code: 'default.created.message', args: [message(code: 'usuario.label', default: 'Usuario'), usuarioInstance.id])
-        redirect(action: "activar")
+       // flash.message = message(code: 'default.created.message', args: [message(code: 'usuario.label', default: 'Usuario'), usuarioInstance.id])
+        redirect(action: "activar", id:usuarioInstance.id)
 
     }
 
@@ -48,6 +48,12 @@ class UsuarioController {
         [usuarioInstance: usuarioInstance]
     }
 
+     def activar(Long id) {
+        def usuarioInstance = Usuario.get(id)
+        [usuarioInstance: usuarioInstance]
+        flash.message= "Bienvenido $usuarioInstance.nombre, revisa tu correo para activar tu cuenta"
+        redirect (uri:'/')
+    }
     def edit(Long id) {
         def usuarioInstance = Usuario.get(id)
         if (!usuarioInstance) {

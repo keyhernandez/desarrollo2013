@@ -58,7 +58,7 @@
                     <li><a href="#">Especiales</a></li>
                     <li><a href="#">Ofertas</a></li>
                     <li><a href="#">Reviews</a></li>
-                    <li><a href="#">Contactos</a></li>
+                    <li><a href="${createLink(controller:'Usuario',action:'create')}">Registro</a></li>
                 </ul>
             </div>
 

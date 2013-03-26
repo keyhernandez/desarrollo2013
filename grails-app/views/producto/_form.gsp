@@ -2,6 +2,14 @@
 
 
 
+<div class="fieldcontain ${hasErrors(bean: productoInstance, field: 'screenshot', 'error')} required">
+	<label for="screenshot">
+		<g:message code="producto.screenshot.label" default="Screenshot" />
+		<span class="required-indicator">*</span>
+	</label>
+	<input type="file" id="screenshot" name="screenshot" />
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: productoInstance, field: 'calificaciones', 'error')} ">
 	<label for="calificaciones">
 		<g:message code="producto.calificaciones.label" default="Calificaciones" />
@@ -16,6 +24,14 @@
 		
 	</label>
 	<g:textField name="descripcion" value="${productoInstance?.descripcion}"/>
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: productoInstance, field: 'categoria', 'error')} ">
+	<label for="categoria">
+		<g:message code="producto.categoria.label" default="Categoria" />
+		
+	</label>
+	<g:textField name="categoria" value="${productoInstance?.categoria}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: productoInstance, field: 'nombre', 'error')} ">

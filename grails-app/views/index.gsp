@@ -94,8 +94,8 @@
 
     <nav><!-- Define the navigation menu -->
         <div>
-            <ul class="sf-menu">
-                <li><a href="#">Menu 1</a>
+            <ul class="sf-menu">   
+                <li><a href="${createLink(controller:'Producto',action:'categorias',params:[categoria:'Televisores'])}">Electronica</a>
                     <ul>
                         <li><a href="#">Submenu 1</a></li>
                         <li><a href="#">Submenu 2</a></li>
@@ -103,17 +103,17 @@
                         <li><a href="#">Submenu 4</a></li>
                     </ul>
                 </li>
-                <li><a href="#">Menu 2</a>
+                <li><a href="#">Hogar</a>
                     <ul>
                         <li><a href="#">Submenu 21</a></li>
                         <li><a href="#">Submenu 22</a>
                             <ul>
                                 <li><a href="#">Submenu a</a></li>
-                                <li><a href="#">Submenu b</a>
+                                <li><a href="#">Electrodomesticos</a>
                                     <ul>
-                                        <li><a href="#">Submenu e</a></li>
-                                        <li><a href="#">Submenu f</a></li>
-                                        <li><a href="#">Submenu g</a></li>
+                                        <li><a href="#">Neveras</a></li>
+                                        <li><a href="#">Cocinas</a></li>
+                                        <li><a href="#">Televisores</a></li>
                                         <li><a href="#">Submenu h</a></li>
                                     </ul>
                                 </li>
@@ -125,15 +125,15 @@
                         <li><a href="#">Submenu 24</a></li>
                     </ul>
                 </li>
-                <li><a href="#">Menu 3</a>
+                <li><a href="#">Ropa</a>
                     <ul>
-                        <li><a href="#">Submenu 31</a></li>
-                        <li><a href="#">Submenu 32</a></li>
-                        <li><a href="#">Submenu 33</a></li>
+                        <li><a href="#">Mujeres</a></li>
+                        <li><a href="#">Hombres</a></li>
+                        <li><a href="#">Ninos</a></li>
                         <li><a href="#">Submenu 34</a></li>
                     </ul>
                 </li>
-                <li><a href="#">Menu 4</a>
+                <li><a href="#">Automoviles</a>
                     <ul>
                         <li><a href="#">Submenu 41</a></li>
                         <li><a href="#">Submenu 42</a></li>
@@ -144,8 +144,6 @@
                 <li><a href="#">Menu 5</a></li>
                 <li><a href="#">Menu 6</a></li>
                 <li><a href="#">Menu 7</a></li>
-                <li><a href="#">Menu 8</a></li>
-                <li><a href="#">Menu 9</a></li>
             </ul>
         </div>
     </nav>
@@ -160,7 +158,7 @@
 
     <section id="content"><!-- Define the content section -->
         <div class="dbox">
-            <div class="head">Productos Populares <g:link controller="Usuario" action="list">INICIAR APLICACION</g:link> </div>
+            <div class="head">Productos Populares <g:link controller="Producto" action="create">INICIAR APLICACION</g:link> </div>
             <div class="list">
                 <ul>
                     <li>
