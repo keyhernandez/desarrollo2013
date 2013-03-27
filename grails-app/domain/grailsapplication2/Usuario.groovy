@@ -14,7 +14,7 @@ class Usuario {
     String fechaRegistro;
     String token;
 
-    static hasMany=[compras:Compra]
+    static hasMany=[compras:Compra,calificaciones:Calificacion, tarjetas:TDC]
     
     static constraints = {
         compras(nullable:true,blank:true)

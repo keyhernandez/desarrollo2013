@@ -3,7 +3,9 @@ package grailsapplication2
 class Carrito {
     
     Integer cantidad;
-    static belongsTo = Compra, Producto
+    Compra compra;
+    Producto producto;
+    static belongsTo = [Compra, Producto]
     
     static constraints = {
     }
