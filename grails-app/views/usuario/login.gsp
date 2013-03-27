@@ -20,12 +20,14 @@
           </ul>
         </div>
       </openid:hasLoginError>
-
       <openid:form success="[action:'loggedin']" onshow="hide('redic')">
         <openid:input id="redic" size="40" value="https://www.google.com/accounts/o8/id" hidden=""/> 
-        <br/>
+        <br/> <openid:identifier />
         <g:submitButton name="login" value="Login" />
       </openid:form>
+    <openid:identifier />
+    
+
     </center>
   </body>
 </html>

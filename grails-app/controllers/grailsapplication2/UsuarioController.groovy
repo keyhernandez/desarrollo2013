@@ -22,6 +22,7 @@ class UsuarioController {
     def save() {
         def usuarioInstance = new Usuario(params)
         usuarioInstance.fechaRegistro=new Date().format("dd/MM/yyyy")
+        usuarioInstance.token= session.openidIdentifier
         if (!usuarioInstance.save(flush: true)) {
             render(view: "create", model: [usuarioInstance: usuarioInstance])
             return
@@ -115,7 +116,18 @@ class UsuarioController {
     def login = { session.usuario=null;
         
     }
-    def loggedin = { redirect(uri:'/') }
+    def loggedin = { 
+        def token=session.openidIdentifier
+        def user=Usuario.executeQuery("from Usuario where token= ?",[token])
+        if (user){
+            session.usuario=user;
+            redirect(uri:'/')
+    }
+    else 
+    {
+        redirect(action:"create")
+    }
+}
 
    
 }
