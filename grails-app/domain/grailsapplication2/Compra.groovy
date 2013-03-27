@@ -9,7 +9,7 @@ class Compra {
     TDC tarjeta;
    
     static belongsTo = Usuario
-    static hasMany = [productos:Producto]
+    
     static constraints = {
     }
 }

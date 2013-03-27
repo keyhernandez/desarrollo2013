@@ -7,8 +7,7 @@ class Producto {
     byte [] screenshot;
     double precio;
     String categoria;
-    
-    static belongsTo = Compra
+ 
     static hasMany = [calificaciones:Calificacion, carrito: Carrito]
     
     static constraints = {
