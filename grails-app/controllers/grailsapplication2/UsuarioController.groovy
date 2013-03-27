@@ -35,7 +35,8 @@ class UsuarioController {
         }
        // flash.message = message(code: 'default.created.message', args: [message(code: 'usuario.label', default: 'Usuario'), usuarioInstance.id])
         redirect(action: "activar", id:usuarioInstance.id)
-
+       
+//render(view:'activar', model:[id:usuarioInstance.id])
     }
 
     def show(Long id) {
@@ -49,11 +50,12 @@ class UsuarioController {
         [usuarioInstance: usuarioInstance]
     }
 
-     def activar(Long id) {
+     def activar(Long id) { println id
         def usuarioInstance = Usuario.get(id)
         [usuarioInstance: usuarioInstance]
         flash.message= "Bienvenido $usuarioInstance.nombre, revisa tu correo para activar tu cuenta"
         redirect (uri:'/')
+       
     }
     def edit(Long id) {
         def usuarioInstance = Usuario.get(id)
@@ -91,7 +93,13 @@ class UsuarioController {
             return
         }
 
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'usuario.label', default: 'Usuario'), usuarioInstance.id])
+     //   flash.message = message(code: 'default.updated.message', args: [message(code: 'usuario.label', default: 'Usuario'), usuarioInstance.id])
+        sendMail{
+            to "kmhernandez.11@est.ucab.edu.ve"
+            from "admin@retro.com"
+            subject "Modificacion de tu perfil en RetroShop"
+            html "Hola, $usuarioInstance.nombre $usuarioInstance.apellido , recientemente has realizado cambios en tu perfil de RetroShop, si los desconoces comunicate con el equipo de RetroShop mediante registro.retroshop@gmail.com"
+        }
         redirect(action: "show", id: usuarioInstance.id)
     }
 

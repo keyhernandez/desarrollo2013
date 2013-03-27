@@ -3,16 +3,16 @@ package grailsapplication2
 class Usuario {
 
     String nombre;
-String apellido;
-String cedula;
-String correo;
-String pais;
-String ciudad;
-String codpostal;
-String direccion;
-String fechaNac;
-String fechaRegistro;
-String token;
+    String apellido;
+    String cedula;
+    String correo;
+    String pais;
+    String ciudad;
+    String codpostal;
+    String direccion;
+    String fechaNac;
+    String fechaRegistro;
+    String token;
 
     static hasMany=[compras:Compra]
     

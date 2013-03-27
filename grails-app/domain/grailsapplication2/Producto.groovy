@@ -9,7 +9,7 @@ class Producto {
     String categoria;
     
     static belongsTo = Compra
-    static hasMany = [calificaciones:Calificacion]
+    static hasMany = [calificaciones:Calificacion, carrito: Carrito]
     
     static constraints = {
         screenshot(maxSize:1073741824)
