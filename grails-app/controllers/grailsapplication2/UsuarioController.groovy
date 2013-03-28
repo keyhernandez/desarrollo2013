@@ -19,7 +19,7 @@ class UsuarioController {
         [usuarioInstance: new Usuario(params)]
     }
 
-    def save() {
+   def save() {
         def usuarioInstance = new Usuario(params)
         usuarioInstance.fechaRegistro=new Date().format("dd/MM/yyyy")
         usuarioInstance.token= session.openidIdentifier
@@ -39,6 +39,15 @@ class UsuarioController {
 //render(view:'activar', model:[id:usuarioInstance.id])
     }
 
+    def activar(Long id) { println id
+        def usuarioInstance = Usuario.get(id)
+        [usuarioInstance: usuarioInstance]
+        flash.message= "Bienvenido $usuarioInstance.nombre, revisa tu correo para activar tu cuenta"
+        redirect (uri:'/')
+       
+    }
+
+
     def show(Long id) {
         def usuarioInstance = Usuario.get(id)
         if (!usuarioInstance) {
@@ -50,13 +59,6 @@ class UsuarioController {
         [usuarioInstance: usuarioInstance]
     }
 
-     def activar(Long id) { println id
-        def usuarioInstance = Usuario.get(id)
-        [usuarioInstance: usuarioInstance]
-        flash.message= "Bienvenido $usuarioInstance.nombre, revisa tu correo para activar tu cuenta"
-        redirect (uri:'/')
-       
-    }
     def edit(Long id) {
         def usuarioInstance = Usuario.get(id)
         if (!usuarioInstance) {
@@ -103,6 +105,7 @@ class UsuarioController {
         redirect(action: "show", id: usuarioInstance.id)
     }
 
+
     def delete(Long id) {
         def usuarioInstance = Usuario.get(id)
         if (!usuarioInstance) {
@@ -121,6 +124,7 @@ class UsuarioController {
             redirect(action: "show", id: id)
         }
     }
+    
     def login = { 
         
     }
@@ -142,4 +146,6 @@ class UsuarioController {
         session.openidIdentifier=null;
         redirect(uri:'/')
     }
+
+
 }

@@ -30,6 +30,8 @@
 					
 						<g:sortableColumn property="numero" title="${message(code: 'TDC.numero.label', default: 'Numero')}" />
 					
+						<th><g:message code="TDC.usuario.label" default="Usuario" /></th>
+					
 					</tr>
 				</thead>
 				<tbody>
@@ -41,6 +43,8 @@
 						<td>${fieldValue(bean: TDCInstance, field: "marca")}</td>
 					
 						<td>${fieldValue(bean: TDCInstance, field: "numero")}</td>
+					
+						<td>${fieldValue(bean: TDCInstance, field: "usuario")}</td>
 					
 					</tr>
 				</g:each>

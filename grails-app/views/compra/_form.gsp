@@ -26,12 +26,12 @@
 	<g:field name="monto" value="${fieldValue(bean: compraInstance, field: 'monto')}" required=""/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: compraInstance, field: 'productos', 'error')} ">
-	<label for="productos">
-		<g:message code="compra.productos.label" default="Productos" />
+<div class="fieldcontain ${hasErrors(bean: compraInstance, field: 'proceso', 'error')} ">
+	<label for="proceso">
+		<g:message code="compra.proceso.label" default="Proceso" />
 		
 	</label>
-	<g:select name="productos" from="${grailsapplication2.Producto.list()}" multiple="multiple" optionKey="id" size="5" value="${compraInstance?.productos*.id}" class="many-to-many"/>
+	<g:textField name="proceso" value="${compraInstance?.proceso}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: compraInstance, field: 'status', 'error')} ">
@@ -48,5 +48,13 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<g:select id="tarjeta" name="tarjeta.id" from="${grailsapplication2.TDC.list()}" optionKey="id" required="" value="${compraInstance?.tarjeta?.id}" class="many-to-one"/>
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: compraInstance, field: 'usuario', 'error')} required">
+	<label for="usuario">
+		<g:message code="compra.usuario.label" default="Usuario" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:select id="usuario" name="usuario.id" from="${grailsapplication2.Usuario.list()}" optionKey="id" required="" value="${compraInstance?.usuario?.id}" class="many-to-one"/>
 </div>
 

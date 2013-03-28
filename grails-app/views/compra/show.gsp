@@ -50,13 +50,11 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${compraInstance?.productos}">
+				<g:if test="${compraInstance?.proceso}">
 				<li class="fieldcontain">
-					<span id="productos-label" class="property-label"><g:message code="compra.productos.label" default="Productos" /></span>
+					<span id="proceso-label" class="property-label"><g:message code="compra.proceso.label" default="Proceso" /></span>
 					
-						<g:each in="${compraInstance.productos}" var="p">
-						<span class="property-value" aria-labelledby="productos-label"><g:link controller="producto" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></span>
-						</g:each>
+						<span class="property-value" aria-labelledby="proceso-label"><g:fieldValue bean="${compraInstance}" field="proceso"/></span>
 					
 				</li>
 				</g:if>
@@ -75,6 +73,15 @@
 					<span id="tarjeta-label" class="property-label"><g:message code="compra.tarjeta.label" default="Tarjeta" /></span>
 					
 						<span class="property-value" aria-labelledby="tarjeta-label"><g:link controller="TDC" action="show" id="${compraInstance?.tarjeta?.id}">${compraInstance?.tarjeta?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${compraInstance?.usuario}">
+				<li class="fieldcontain">
+					<span id="usuario-label" class="property-label"><g:message code="compra.usuario.label" default="Usuario" /></span>
+					
+						<span class="property-value" aria-labelledby="usuario-label"><g:link controller="usuario" action="show" id="${compraInstance?.usuario?.id}">${compraInstance?.usuario?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>

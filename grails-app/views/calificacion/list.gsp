@@ -26,7 +26,11 @@
 					
 						<g:sortableColumn property="comentario" title="${message(code: 'calificacion.comentario.label', default: 'Comentario')}" />
 					
+						<th><g:message code="calificacion.producto.label" default="Producto" /></th>
+					
 						<g:sortableColumn property="puntuacion" title="${message(code: 'calificacion.puntuacion.label', default: 'Puntuacion')}" />
+					
+						<th><g:message code="calificacion.usuario.label" default="Usuario" /></th>
 					
 					</tr>
 				</thead>
@@ -36,7 +40,11 @@
 					
 						<td><g:link action="show" id="${calificacionInstance.id}">${fieldValue(bean: calificacionInstance, field: "comentario")}</g:link></td>
 					
+						<td>${fieldValue(bean: calificacionInstance, field: "producto")}</td>
+					
 						<td>${fieldValue(bean: calificacionInstance, field: "puntuacion")}</td>
+					
+						<td>${fieldValue(bean: calificacionInstance, field: "usuario")}</td>
 					
 					</tr>
 				</g:each>

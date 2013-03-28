@@ -10,12 +10,12 @@
 	<input type="file" id="screenshot" name="screenshot" />
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: productoInstance, field: 'calificaciones', 'error')} ">
-	<label for="calificaciones">
-		<g:message code="producto.calificaciones.label" default="Calificaciones" />
+<div class="fieldcontain ${hasErrors(bean: productoInstance, field: 'categoria', 'error')} ">
+	<label for="categoria">
+		<g:message code="producto.categoria.label" default="Categoria" />
 		
 	</label>
-	<g:select name="calificaciones" from="${grailsapplication2.Calificacion.list()}" multiple="multiple" optionKey="id" size="5" value="${productoInstance?.calificaciones*.id}" class="many-to-many"/>
+	<g:textField name="categoria" value="${productoInstance?.categoria}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: productoInstance, field: 'descripcion', 'error')} ">
@@ -24,14 +24,6 @@
 		
 	</label>
 	<g:textField name="descripcion" value="${productoInstance?.descripcion}"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: productoInstance, field: 'categoria', 'error')} ">
-	<label for="categoria">
-		<g:message code="producto.categoria.label" default="Categoria" />
-		
-	</label>
-	<g:textField name="categoria" value="${productoInstance?.categoria}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: productoInstance, field: 'nombre', 'error')} ">

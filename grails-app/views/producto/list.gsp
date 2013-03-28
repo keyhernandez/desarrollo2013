@@ -11,6 +11,10 @@
   
   
   <div id="list-producto" class="content scaffold-list" role="main">
+    <div id="show-producto" class="content scaffold-show" role="main">
+    <section id="content">
+      <div class="dbox">
+        <div class="list">
     <h1>Productos</h1>
     <g:if test="${flash.message}">
       <div class="message" role="status">${flash.message}</div>
@@ -49,6 +53,9 @@
       </g:each>
       </tbody>
     </table>
+     </div>
+      </div>
+    </section>
     <div class="pagination">
       <g:paginate total="${productoInstanceTotal}" />
     </div>

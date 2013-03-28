@@ -32,11 +32,29 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${calificacionInstance?.producto}">
+				<li class="fieldcontain">
+					<span id="producto-label" class="property-label"><g:message code="calificacion.producto.label" default="Producto" /></span>
+					
+						<span class="property-value" aria-labelledby="producto-label"><g:link controller="producto" action="show" id="${calificacionInstance?.producto?.id}">${calificacionInstance?.producto?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${calificacionInstance?.puntuacion}">
 				<li class="fieldcontain">
 					<span id="puntuacion-label" class="property-label"><g:message code="calificacion.puntuacion.label" default="Puntuacion" /></span>
 					
 						<span class="property-value" aria-labelledby="puntuacion-label"><g:fieldValue bean="${calificacionInstance}" field="puntuacion"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${calificacionInstance?.usuario}">
+				<li class="fieldcontain">
+					<span id="usuario-label" class="property-label"><g:message code="calificacion.usuario.label" default="Usuario" /></span>
+					
+						<span class="property-value" aria-labelledby="usuario-label"><g:link controller="usuario" action="show" id="${calificacionInstance?.usuario?.id}">${calificacionInstance?.usuario?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>

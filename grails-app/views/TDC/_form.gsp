@@ -43,3 +43,11 @@
 	<g:field name="numero" type="number" value="${TDCInstance.numero}" required=""/>
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: TDCInstance, field: 'usuario', 'error')} required">
+	<label for="usuario">
+		<g:message code="TDC.usuario.label" default="Usuario" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:select id="usuario" name="usuario.id" from="${grailsapplication2.Usuario.list()}" optionKey="id" required="" value="${TDCInstance?.usuario?.id}" class="many-to-one"/>
+</div>
+

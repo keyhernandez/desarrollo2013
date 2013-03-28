@@ -30,6 +30,8 @@
 					
 						<g:sortableColumn property="monto" title="${message(code: 'compra.monto.label', default: 'Monto')}" />
 					
+						<g:sortableColumn property="proceso" title="${message(code: 'compra.proceso.label', default: 'Proceso')}" />
+					
 						<g:sortableColumn property="status" title="${message(code: 'compra.status.label', default: 'Status')}" />
 					
 						<th><g:message code="compra.tarjeta.label" default="Tarjeta" /></th>
@@ -45,6 +47,8 @@
 						<td>${fieldValue(bean: compraInstance, field: "fechaEntrega")}</td>
 					
 						<td>${fieldValue(bean: compraInstance, field: "monto")}</td>
+					
+						<td>${fieldValue(bean: compraInstance, field: "proceso")}</td>
 					
 						<td>${fieldValue(bean: compraInstance, field: "status")}</td>
 					

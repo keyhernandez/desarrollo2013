@@ -61,6 +61,15 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${TDCInstance?.usuario}">
+				<li class="fieldcontain">
+					<span id="usuario-label" class="property-label"><g:message code="TDC.usuario.label" default="Usuario" /></span>
+					
+						<span class="property-value" aria-labelledby="usuario-label"><g:link controller="usuario" action="show" id="${TDCInstance?.usuario?.id}">${TDCInstance?.usuario?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+			
 			</ol>
 			<g:form>
 				<fieldset class="buttons">
