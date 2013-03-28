@@ -7,8 +7,8 @@ class Compra {
     String fechaCompra;
     String fechaEntrega;
     TDC tarjeta;
-   
-    static belongsTo = Usuario
+    String proceso;
+    static belongsTo = [usuario:Usuario]
     
     static constraints = {
     }

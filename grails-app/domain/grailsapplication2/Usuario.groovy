@@ -13,11 +13,13 @@ class Usuario {
     String fechaNac;
     String fechaRegistro;
     String token;
-
-    static hasMany=[compras:Compra,calificaciones:Calificacion, tarjetas:TDC]
+  
+  //  static hasMany=[compras:Compra,calificaciones:Calificacion, tarjetas:TDC]
     
     static constraints = {
-        compras(nullable:true,blank:true)
+       // compras(nullable:true,blank:true)
+       // calificaciones (nullable:true,blank:true)
+       // tarjetas (nullable:true,blank:true)
         token (nullable:true,blank:true,maxSize: 100) 
         nombre(nullable:false,blank:false)
         apellido(nullable:false,blank:false)

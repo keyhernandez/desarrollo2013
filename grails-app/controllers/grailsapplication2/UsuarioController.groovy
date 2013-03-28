@@ -121,7 +121,7 @@ class UsuarioController {
             redirect(action: "show", id: id)
         }
     }
-    def login = { session.usuario=null;
+    def login = { 
         
     }
     def loggedin = { 
@@ -137,5 +137,9 @@ class UsuarioController {
     }
 }
 
-   
+    def logout = {
+        session.usuario=null;
+        session.openidIdentifier=null;
+        redirect(uri:'/')
+    }
 }

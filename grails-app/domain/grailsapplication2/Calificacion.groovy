@@ -5,7 +5,7 @@ class Calificacion {
    int puntuacion;
     String comentario;
     
-    static belongsTo = [Producto, Usuario]
+    static belongsTo = [producto:Producto, usuario:Usuario]
     static constraints = {
     }
 }

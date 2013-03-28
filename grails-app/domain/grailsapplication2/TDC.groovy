@@ -7,6 +7,7 @@ class TDC {
     String fechaVence;
     
     static hasMany = [compras:Compra]
+    static belongsTo = [usuario:Usuario]
     static constraints = {
     }
 }
