@@ -105,5 +105,15 @@ class ProductoController {
         response.outputStream << imagen.screenshot
         response.outputStream.flush()
     }
+    
+    
+
+    def categorias(Integer max, String categoria){
+        params.max = Math.min(max ?: 10, 100)
+        def productos= Producto.executeQuery("from Producto where categoria= ?", [categoria])
+        println(productos)
+        [productoInstanceList : productos, productoInstanceTotal:Producto.count()]
+    }
+
 
 }

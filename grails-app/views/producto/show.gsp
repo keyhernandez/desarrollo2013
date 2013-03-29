@@ -17,70 +17,60 @@
     </ul>
   </div>
   <div id="show-producto" class="content scaffold-show" role="main">
-    
-    
-    <section id="content">
-      <div class="dbox">
-        <div class="list">
-          <ul>
-           
-          <h1>${productoInstance?.nombre}</h1>
 
-          <g:if test="${flash.message}">
-            <div class="message" role="status">${flash.message}</div>
-          </g:if>
-          <ol class="property-list producto">
+    <section id="content"><!-- Define the content #2 section -->
+      <div class="col1">
+        <div class="dbox">
+          <div class="head">Carrito</div>
+          <div class="tags">
+            <ul>
+              <g:form name="carro" url="[action:'micarrito',controller:'carrito']">
+              <g:render template="/carrito/micarrito"/>
+              </g:form>
+            </ul>
+          </div>
+        </div>
+      </div>
 
-            <g:if test="${productoInstance?.screenshot}">
-              <div>
+      <div class="col2">
+        <div class="dbox">
+          <div class="head">Detalle</div>
+          <div class="blist">
+            <ul>
 
-                <img width="30%" height="30%" alt="Img" src="http://localhost:7070/GrailsApplication2/producto/showImage/${productoInstance?.id}">
-              </div>
-            </g:if>
+              <li>
+                <div class="img">
+                  <a href="#">
+                    <img src="http://localhost:7070/GrailsApplication2/producto/showImage/${productoInstance?.id}" />
+                  </a>
+                </div>
+                <div class="desc">
+                  <div class="d"><span>Date Added:</span> Thursday 27 March, 2012</div>
+                  <h2><a href="${createLink(controller:'Carrito',action:'agregarAlcarro',params:[idp:productoInstance?.id,cantidad:5])}">${productoInstance?.nombre}</a></h2>
+                  <div class="d">Precio: <div class="price">Bs. ${productoInstance?.precio}</div></div>
+                  <div class="d">${productoInstance?.descripcion}</div>
+                  <div>
+                    <div class="but" > 
+                      <a href="https://twitter.com/share" class="twitter-share-button" data-lang="es" data-hashtags="RetroShop">
+                        Twittear </a>
+                      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id))
+                        {js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}
+                      (document,"script","twitter-wjs");
+                      </script>
+                    </div>
+                    <div class="but"><p><a>Agrega al Carro</a></p><p></p></div>
+                  </div>
+                </div>
+              </li>
 
-            <!--   MOSTRAR CALIFICACIONES -->
-
-            <g:if test="${productoInstance?.descripcion}">
-              <div>
 
 
-                <span class="property-value" aria-labelledby="descripcion-label"><g:fieldValue bean="${productoInstance}" field="descripcion"/></span>
 
-              </div>
-            </g:if>
-
-
-            <g:if test="${productoInstance?.precio}">
-              <div>
-                <span id="precio-label" class="property-label"><g:message code="producto.precio.label" default="Precio" /></span>
-
-                <span class="property-value" aria-labelledby="precio-label"><g:fieldValue bean="${productoInstance}" field="precio"/> Bs.</span>
-
-              </div>
-            </g:if>
-
-            <a href="https://twitter.com/share" class="twitter-share-button" data-lang="es" data-hashtags="RetroShop">
-              Twittear
-            </a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id))
-              {js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}
-            (document,"script","twitter-wjs");
-            </script>
-
-            
-            
-            <a href="#">
-              <span class="price">
-                <p>Bs. ${productoInstance?.precio}</p>
-              </span>
-              <div class="but"><p>Agrega al carro</p><p></p></div>
-            </a>
-            
-          </ul>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
-
   </ol>
 
 </div>

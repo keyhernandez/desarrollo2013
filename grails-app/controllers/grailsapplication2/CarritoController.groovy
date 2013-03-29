@@ -1,6 +1,9 @@
 package grailsapplication2
 
 import org.springframework.dao.DataIntegrityViolationException
+import grailsapplication2.Compra
+import grailsapplication2.Usuario
+import grailsapplication2.Producto
 
 class CarritoController {
 
@@ -10,10 +13,7 @@ class CarritoController {
         redirect(action: "list", params: params)
     }
 
-    def list(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        [carritoInstanceList: Carrito.list(params), carritoInstanceTotal: Carrito.count()]
-    }
+
 
     def create() {
         [carritoInstance: new Carrito(params)]
@@ -63,7 +63,7 @@ class CarritoController {
         if (version != null) {
             if (carritoInstance.version > version) {
                 carritoInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                          [message(code: 'carrito.label', default: 'Carrito')] as Object[],
+                    [message(code: 'carrito.label', default: 'Carrito')] as Object[],
                           "Another user has updated this Carrito while you were editing")
                 render(view: "edit", model: [carritoInstance: carritoInstance])
                 return
@@ -98,5 +98,71 @@ class CarritoController {
             flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'carrito.label', default: 'Carrito'), id])
             redirect(action: "show", id: id)
         }
+    }
+    
+    def list(Integer max) {
+        params.max = Math.min(max ?: 10, 100)
+        [carritoInstanceList: Carrito.list(params), carritoInstanceTotal: Carrito.count()]
+    }
+    
+    def micarrito(Integer max){
+        params.max = Math.min(max ?: 10, 100)
+    
+        def user=Usuario.get(session.usuario.id)
+        println session.usuario.id
+        def ultimaCompra= Compra.get(Compra.executeQuery("select max(id) from Compra where usuario_id = ? and proceso = 'carro'",[user.id])[0])
+        println ultimaCompra.id
+        def idproductosCarro= Carrito.executeQuery ("select producto_id from Carrito where compra_id = ?",[ultimaCompra.id])
+        ArrayList<Producto> productos=new ArrayList<Producto> (); 
+        idproductosCarro.each() { idproducto -> productos.add(Producto.get(idproducto))
+            
+        }
+        [carritoInstanceList1: productos, carritoInstanceTotal1: productos.count()]
+        
+        
+    }
+    
+    
+    def agregarAlcarro (Long idp, int cantidad) {
+      
+        println session.usuario
+        def user= Usuario.findById(session.usuario.id[0])
+        def producto=Producto.get(idp)
+        
+        def consultaCompra= Compra.executeQuery("select max(id) from Compra where usuario_id = ?",[user.id])
+        
+        
+        if (consultaCompra && Compra.get(consultaCompra[0]).proceso!='carro')
+        {
+            def compra=new Compra(monto:123,proceso:'carro',usuario:user)
+            compra.save(flush:true)
+            println(compra.id)
+        
+            def ultimaCompra= Compra.executeQuery("select max(id) from Compra where usuario_id = ? and proceso = 'carro'",[user.id])
+        
+            def carritoInstance = new Carrito(compra:Compra.get(ultimaCompra[0]),producto:producto,cantidad:cantidad)
+            carritoInstance.save(flush:true)
+            println(carritoInstance.id)
+        }
+        else if (consultaCompra && Compra.get(consultaCompra[0]).proceso=='carro' ) {
+            def carritoInstance = new Carrito(compra:Compra.get(consultaCompra[0]),producto:producto,cantidad:cantidad)
+            carritoInstance.save(flush:true)
+            println(carritoInstance.id)
+        }
+        else {
+            def compra=new Compra(monto:123,proceso:'carro',usuario:user)
+            compra.save(flush:true)
+            println(compra.id)
+        
+            def ultimaCompra= Compra.executeQuery("select max(id) from Compra where usuario_id = ? and proceso = 'carro'",[user.id])
+        
+            def carritoInstance = new Carrito(compra:Compra.get(ultimaCompra[0]),producto:producto,cantidad:cantidad)
+ 
+            carritoInstance.save(flush:true)
+            println(carritoInstance.id)
+            
+        }
+        
+        redirect (controller:'Producto', action:'show', id:producto.id)
     }
 }

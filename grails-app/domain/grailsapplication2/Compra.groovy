@@ -11,5 +11,12 @@ class Compra {
     static belongsTo = [usuario:Usuario]
     
     static constraints = {
+        status (nullable: true);
+        fechaEntrega(nullable:true)
+        tarjeta(nullable:true)
+        status(nullable:true)
+        monto (nullable:true)
+        fechaCompra (nullable:true)
+        
     }
 }
