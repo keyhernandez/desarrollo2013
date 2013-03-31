@@ -18,15 +18,14 @@
   </div>
   <div id="show-producto" class="content scaffold-show" role="main">
 
-    <section id="content"><!-- Define the content #2 section -->
+    <section id="content"><!-- Define the content #2 section    <g:form name="carro" url="[action:'micarrito',controller:'Carrito']">  </g:form> -->
       <div class="col1">
         <div class="dbox">
           <div class="head">Carrito</div>
           <div class="tags">
             <ul>
-              <g:form name="carro" url="[action:'micarrito',controller:'carrito']">
               <g:render template="/carrito/micarrito"/>
-              </g:form>
+       
             </ul>
           </div>
         </div>

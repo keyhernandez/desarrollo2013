@@ -9,4 +9,19 @@ class Carrito {
     
     static constraints = {
     }
+    
+    
+      def micarrito (){
+            
+        def user=Usuario.findById(session.usuario.id)
+        
+        def ultimaCompra=Compra.findByProcesoAndUsuario("carro",user)
+
+                def productos=Carrito.findAllByCompra(ultimaCompra)
+        
+               return productos
+       
+       
+        
+    }
 }

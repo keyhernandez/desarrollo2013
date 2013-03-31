@@ -57,7 +57,7 @@
       </div>
     </section>
     <div class="pagination">
-      <g:paginate total="${carritoInstanceTotal}" />
+      <g:paginate total="${productoInstanceTotal}" />
     </div>
   </div>
 </body>

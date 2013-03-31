@@ -105,20 +105,29 @@ class CarritoController {
         [carritoInstanceList: Carrito.list(params), carritoInstanceTotal: Carrito.count()]
     }
     
-    def micarrito(Integer max){
-        params.max = Math.min(max ?: 10, 100)
-    
-        def user=Usuario.get(session.usuario.id)
-        println session.usuario.id
-        def ultimaCompra= Compra.get(Compra.executeQuery("select max(id) from Compra where usuario_id = ? and proceso = 'carro'",[user.id])[0])
-        println ultimaCompra.id
-        def idproductosCarro= Carrito.executeQuery ("select producto_id from Carrito where compra_id = ?",[ultimaCompra.id])
-        ArrayList<Producto> productos=new ArrayList<Producto> (); 
-        idproductosCarro.each() { idproducto -> productos.add(Producto.get(idproducto))
-            
-        }
-        [carritoInstanceList1: productos, carritoInstanceTotal1: productos.count()]
+    def micarrito ={
         
+    
+        def user=Usuario.findById(session.usuario.id)
+        
+        def ultimaCompra=Compra.findByProcesoAndUsuario("carro",user)
+        println ultimaCompra.id
+        
+        def productos=Carrito.findAllByCompra(ultimaCompra)
+        
+        // def idproductosCarro= Carrito.executeQuery ("select cast(producto_id as integer) from Carrito where compra_id = ?",[ultimaCompra.id])
+        
+        println productos
+        
+        //    ArrayList<Producto> productos=new ArrayList<Producto> (); 
+        //    idproductosCarro.each() { idproducto -> productos.add(Producto.get(idproducto))
+            
+        //    }
+        //  println productos
+        //  println  productos.size()
+        [carritoInstanceList1: productos, carritoInstanceTotal1: productos.size()]
+        render(template:"micarrito",model:[carritoInstanceList1: productos, carritoInstanceTotal1: productos.count()])
+       
         
     }
     
@@ -129,40 +138,45 @@ class CarritoController {
         def user= Usuario.findById(session.usuario.id[0])
         def producto=Producto.get(idp)
         
-        def consultaCompra= Compra.executeQuery("select max(id) from Compra where usuario_id = ?",[user.id])
+        //def consultaCompra=Compra.findByUsuario(user)
+       
+        def consultaCompra= Compra.findById(Compra.executeQuery("select max(id) from Compra where usuario_id = ?",[user.id])[0])
+        println consultaCompra
         
-        
-        if (consultaCompra && Compra.get(consultaCompra[0]).proceso!='carro')
-        {
+        if (consultaCompra==null){
             def compra=new Compra(monto:123,proceso:'carro',usuario:user)
             compra.save(flush:true)
             println(compra.id)
         
-            def ultimaCompra= Compra.executeQuery("select max(id) from Compra where usuario_id = ? and proceso = 'carro'",[user.id])
+            def ultimaCompra=Compra.findByProcesoAndUsuario("carro",user)
+            // def ultimaCompra= Compra.executeQuery("select max(id) from Compra where usuario_id = ? and proceso = 'carro'",[user.id])
         
-            def carritoInstance = new Carrito(compra:Compra.get(ultimaCompra[0]),producto:producto,cantidad:cantidad)
-            carritoInstance.save(flush:true)
-            println(carritoInstance.id)
-        }
-        else if (consultaCompra && Compra.get(consultaCompra[0]).proceso=='carro' ) {
-            def carritoInstance = new Carrito(compra:Compra.get(consultaCompra[0]),producto:producto,cantidad:cantidad)
-            carritoInstance.save(flush:true)
-            println(carritoInstance.id)
-        }
-        else {
-            def compra=new Compra(monto:123,proceso:'carro',usuario:user)
-            compra.save(flush:true)
-            println(compra.id)
-        
-            def ultimaCompra= Compra.executeQuery("select max(id) from Compra where usuario_id = ? and proceso = 'carro'",[user.id])
-        
-            def carritoInstance = new Carrito(compra:Compra.get(ultimaCompra[0]),producto:producto,cantidad:cantidad)
+            def carritoInstance = new Carrito(compra:ultimaCompra,producto:producto,cantidad:cantidad)
  
             carritoInstance.save(flush:true)
             println(carritoInstance.id)
-            
+       
         }
+        else {
+            if (consultaCompra.proceso!='carro')
+            {
+                def compra=new Compra(monto:123,proceso:'carro',usuario:user)
+                compra.save(flush:true)
+                println(compra.id)
         
+                def ultimaCompra= Compra.findByProcesoAndUsuario("carro",user)
+        
+                def carritoInstance = new Carrito(compra:ultimaCompra,producto:producto,cantidad:cantidad)
+                carritoInstance.save(flush:true)
+                println(carritoInstance.id)
+            }
+            else if (consultaCompra.proceso=='carro' ) {
+                def carritoInstance = new Carrito(compra:consultaCompra,producto:producto,cantidad:cantidad)
+                carritoInstance.save(flush:true)
+                println(carritoInstance.id)
+            }
+        }
+     
         redirect (controller:'Producto', action:'show', id:producto.id)
     }
 }
