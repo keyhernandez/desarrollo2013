@@ -9,9 +9,9 @@ class Carrito {
     
     static constraints = {
     }
+    static transients = [ 'micarrito' ] 
     
-    
-      def micarrito (){
+   List getMicarrito (){
             
         def user=Usuario.findById(session.usuario.id)
         
@@ -19,7 +19,7 @@ class Carrito {
 
                 def productos=Carrito.findAllByCompra(ultimaCompra)
         
-               return productos
+               return productos.toList()
        
        
         

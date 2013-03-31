@@ -32,6 +32,8 @@ class ProductoController {
 
     def show(Long id) {
         def productoInstance = Producto.get(id)
+        
+        println Producto.findAll("from Producto p where p.id in (select cast(producto_id as integer) from Carrito where compra_id= (select cast(max (id) as integer) from Compra where  proceso='carro'))")
         if (!productoInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'producto.label', default: 'Producto'), id])
             redirect(action: "list")

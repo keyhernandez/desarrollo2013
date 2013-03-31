@@ -23,7 +23,7 @@
       <thead>
         <tr>
 
-      <g:sortableColumn property="screenshot" title="${message(code: 'producto.screenshot.label', default: 'Screenshot')}" />
+      <g:sortableColumn property="screenshot" title="Screenshot" />
 
       <g:sortableColumn property="descripcion" title="${message(code: 'producto.descripcion.label', default: 'Descripcion')}" />
 
@@ -38,7 +38,7 @@
         <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 
           <td>
-        <g:link action="show" id="${productoInstance.id}">${fieldValue(bean: productoInstance, field: "id")}
+        <g:link action="show" id="${productoInstance.id}">
           <img width="25%" height="10%" alt="Img" src="http://localhost:7070/GrailsApplication2/producto/showImage/${productoInstance.id}">
         </g:link>
       </td>
