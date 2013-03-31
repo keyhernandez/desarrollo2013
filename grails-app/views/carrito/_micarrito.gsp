@@ -19,14 +19,20 @@
 
         <td>
       <g:link action="show" id="${productoInstance.id}">
-        <img width="25%" height="10%" alt="Img" src="http://localhost:7070/GrailsApplication2/producto/showImage/${productoInstance.id}">
+        <img width="50" height="50" alt="Img" src="http://localhost:7070/GrailsApplication2/producto/showImage/${productoInstance.id}">
       </g:link>
       </td>
 
       <td>${fieldValue(bean: productoInstance, field: "nombre")}</td>
 
-      <td>${fieldValue(bean: productoInstance, field: "precio")}</td>
+      <td> <li><a href="${createLink(controller:'Carrito',action:'eliminarDelcarro', params:[idp:productoInstance.id])}">Eliminar</a></li></td>
+      </tr>
     </g:each>
+    
+    
     </tbody>
+   
+    
   </table>
+   <li><a href="">Terminar Compra</a></li>
 </div>

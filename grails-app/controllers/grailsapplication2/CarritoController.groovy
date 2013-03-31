@@ -114,17 +114,7 @@ class CarritoController {
         println ultimaCompra.id
         
         def productos=Carrito.findAllByCompra(ultimaCompra)
-        
-        // def idproductosCarro= Carrito.executeQuery ("select cast(producto_id as integer) from Carrito where compra_id = ?",[ultimaCompra.id])
-        
-        println productos
-        
-        //    ArrayList<Producto> productos=new ArrayList<Producto> (); 
-        //    idproductosCarro.each() { idproducto -> productos.add(Producto.get(idproducto))
-            
-        //    }
-        //  println productos
-        //  println  productos.size()
+
         [carritoInstanceList1: productos, carritoInstanceTotal1: productos.size()]
         render(template:"micarrito",model:[carritoInstanceList1: productos, carritoInstanceTotal1: productos.count()])
        
@@ -177,6 +167,18 @@ class CarritoController {
             }
         }
      
+        redirect (controller:'Producto', action:'show', id:producto.id)
+    }
+    
+    def eliminarDelcarro(Long idp){
+        def user= Usuario.findById(session.usuario.id[0])
+        def producto=Producto.get(idp)
+       
+        def consultaCompra= Compra.findById(Compra.executeQuery("select max(id) from Compra where usuario_id = ?",[user.id])[0])
+        
+        def carro=Carrito.findByCompraAndProducto(consultaCompra,producto)
+        carro.delete(flush:true)
+        
         redirect (controller:'Producto', action:'show', id:producto.id)
     }
 }
