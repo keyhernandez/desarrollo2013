@@ -43,7 +43,7 @@
 //}
 
 
-
+/**
 dataSource {
    pooled = true
    dbCreate = "update"
@@ -51,15 +51,40 @@ dataSource {
    driverClassName = "oracle.jdbc.driver.OracleDriver"
    dialect = "org.hibernate.dialect.Oracle10gDialect"
 }
+**/
+
+// MySQL
+dataSource {
+   pooled = true
+   dbCreate = "update"
+   // Driver Oracle
+   driverClassName = "com.mysql.jdbc.Driver"
+   dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
+}
+
 hibernate {
    cache.use_second_level_cache=false
    cache.use_query_cache=false
    cache.provider_class='net.sf.ehcache.hibernate.EhCacheProvider'
 }
+
+/**
 environments {
-   // Nombre de la base de datos con la que trabajaremos
+
+    // Nombre de la base de datos con la que trabajaremos
    String baseDeDatos = "XE"  
-   //Entorno de  Desarrollo
+   mysql_dv {
+       dataSource {
+           dbCreate = "update"
+           // Usuario
+           username = "desa"
+           password = "123456"
+           url = "jdbc:oracle:thin:@127.0.0.1:1521:XE"
+       }
+   }
+
+    
+    //Entorno de  Desarrollo
    development {
        dataSource {
            dbCreate = "update"
@@ -69,6 +94,7 @@ environments {
            url = "jdbc:oracle:thin:@127.0.0.1:1521:XE"
        }
    }
+
    // Entorno Test
    test {
        dataSource {
@@ -90,5 +116,35 @@ environments {
        }
    }
 }
+**/
 
-//hola
+// MySQL
+environments {
+    development {
+        dataSource {
+            dbCreate = "create" // one of 'create', 'create-drop','update'
+            url = "jdbc:mysql://localhost/ecommerce?useUnicode=yes&characterEncoding=UTF-8"
+            username = "ecommerce"
+            password = "ecommerce"
+        }
+        hibernate {
+            show_sql = true
+        }
+    }
+    test {
+        dataSource {
+            dbCreate = "create-drop" // one of 'create', 'create-drop','update'
+            url = "jdbc:mysql://localhost/ecommerce?useUnicode=yes&characterEncoding=UTF-8"
+            username = "ecommerce"
+            password = "ecommerce"
+        }
+    }
+    production {
+        dataSource {
+            dbCreate = "update"
+            url = "jdbc:mysql://localhost/ecommerce?useUnicode=yes&characterEncoding=UTF-8"
+            username = "ecommerce"
+            password = "ecommerce"
+        }
+    }
+}
