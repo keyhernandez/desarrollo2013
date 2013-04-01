@@ -49,7 +49,7 @@ class UsuarioController {
 
 
     def show(Long id) {
-        def usuarioInstance = Usuario.get(id)
+        def usuarioInstance = Usuario.get(session.usuario.id[0])
         if (!usuarioInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'usuario.label', default: 'Usuario'), id])
             redirect(action: "list")
@@ -60,7 +60,7 @@ class UsuarioController {
     }
 
     def edit(Long id) {
-        def usuarioInstance = Usuario.get(id)
+        def usuarioInstance = Usuario.findById(session.usuario.id[0])
         if (!usuarioInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'usuario.label', default: 'Usuario'), id])
             redirect(action: "list")

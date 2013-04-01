@@ -66,7 +66,7 @@
            </g:else>
           
           <g:if test="${session.usuario!=null}">
-             <li><a href="${createLink(controller:'Usuario',action:'edit', params:[id:session.usuario.id])}">Perfil ${session.usuario.nombre}</a></li>
+             <li><a href="${createLink(controller:'Usuario',action:'show', params:[id:session.usuario.id])}">Perfil ${session.usuario.nombre}</a></li>
           </g:if>
           <g:else>
              <li><a href="${createLink(controller:'Usuario',action:'create')}">Registro </a></li>
