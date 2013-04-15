@@ -2,34 +2,11 @@
 
 
 
-<div class="fieldcontain ${hasErrors(bean: TDCInstance, field: 'compras', 'error')} ">
-	<label for="compras">
-		<g:message code="TDC.compras.label" default="Compras" />
-		
-	</label>
-	
-<ul class="one-to-many">
-<g:each in="${TDCInstance?.compras?}" var="c">
-    <li><g:link controller="compra" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></li>
-</g:each>
-<li class="add">
-<g:link controller="compra" action="create" params="['TDC.id': TDCInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'compra.label', default: 'Compra')])}</g:link>
-</li>
-</ul>
 
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: TDCInstance, field: 'fechaVence', 'error')} ">
-	<label for="fechaVence">
-		<g:message code="TDC.fechaVence.label" default="Fecha Vence" />
-		
-	</label>
-	<g:textField name="fechaVence" value="${TDCInstance?.fechaVence}"/>
-</div>
 
 <div class="fieldcontain ${hasErrors(bean: TDCInstance, field: 'marca', 'error')} ">
 	<label for="marca">
-		<g:message code="TDC.marca.label" default="Marca" />
+		Vendor
 		
 	</label>
 	<g:textField name="marca" value="${TDCInstance?.marca}"/>
@@ -43,11 +20,16 @@
 	<g:field name="numero" type="number" value="${TDCInstance.numero}" required=""/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: TDCInstance, field: 'usuario', 'error')} required">
-	<label for="usuario">
-		<g:message code="TDC.usuario.label" default="Usuario" />
-		<span class="required-indicator">*</span>
+<div class="fieldcontain ${hasErrors(bean: TDCInstance, field: 'fechaVence', 'error')} ">
+	<label for="fechaVence">
+		Fecha de Vencimiento
+		
 	</label>
-	<g:select id="usuario" name="usuario.id" from="${grailsapplication2.Usuario.list()}" optionKey="id" required="" value="${TDCInstance?.usuario?.id}" class="many-to-one"/>
+	<g:textField name="fechaVence" value="${TDCInstance?.fechaVence}"/>
 </div>
+
+
+
+
+
 

@@ -9,5 +9,9 @@ class TDC {
     static hasMany = [compras:Compra]
     static belongsTo = [usuario:Usuario]
     static constraints = {
+        usuario(nullable:true)
+    }
+    String toString() {
+        return "${marca+" "+numero}"
     }
 }

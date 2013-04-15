@@ -14,9 +14,9 @@
           <div class="tags">
             <ul>
               <li><a href="${createLink(controller:'Usuario',action:'edit', params:[id:session.usuario.id])}">Editar Datos Personales</a></li>
-                <li><a href="${createLink(controller:'Carrito',action:'eliminarDelcarro')}">Tarjetas de Credito</a></li>
+                <li><a href="${createLink(controller:'TDC',action:'list')}">Tarjetas de Credito</a></li>
                 
-              <li><a href="${createLink(controller:'Carrito',action:'eliminarDelcarro')}">Compras/Ordenes</a></li>
+              <li><a href="${createLink(controller:'Compra',action:'list')}">Compras/Ordenes</a></li>
               <li><a href="${createLink(controller:'Carrito',action:'eliminarDelcarro')}">Mi Carrito</a></li>
               </table>
             </ul>

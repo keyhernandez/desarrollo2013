@@ -989,6 +989,14 @@ section#banners ul  li {
     overflow: hidden;
     width: 625px;
 }
+
+.col3 {
+    float: left;
+    padding: 0 0 40px 40px;
+    margin-right: 40px;
+    overflow: hidden;
+    width: 900px;
+}
 section#content {
     margin: 0 auto;
     overflow: hidden;

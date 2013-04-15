@@ -34,5 +34,5 @@
    
     
   </table>
-   <li><a href="">Terminar Compra</a></li>
+   <li><a href="${createLink(controller:'Carrito',action:'micarrito')}">Terminar Compra</a></li>
 </div>

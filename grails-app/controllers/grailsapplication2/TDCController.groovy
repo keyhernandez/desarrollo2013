@@ -10,9 +10,10 @@ class TDCController {
         redirect(action: "list", params: params)
     }
 
-    def list(Integer max) {
+    def list(Integer max) { println params
         params.max = Math.min(max ?: 10, 100)
-        [TDCInstanceList: TDC.list(params), TDCInstanceTotal: TDC.count()]
+        def user=Usuario.findById(session.usuario.id[0])
+        [TDCInstanceList: TDC.findAllByUsuario(user), TDCInstanceTotal: TDC.count()]
     }
 
     def create() {
@@ -20,6 +21,7 @@ class TDCController {
     }
 
     def save() {
+        params.usuario=Usuario.findById(session.usuario.id[0])
         def TDCInstance = new TDC(params)
         if (!TDCInstance.save(flush: true)) {
             render(view: "create", model: [TDCInstance: TDCInstance])
@@ -78,7 +80,7 @@ class TDCController {
         }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'TDC.label', default: 'TDC'), TDCInstance.id])
-        redirect(action: "show", id: TDCInstance.id)
+        redirect(action: "list")
     }
 
     def delete(Long id) {

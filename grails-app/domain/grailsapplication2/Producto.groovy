@@ -11,7 +11,7 @@ class Producto {
   //  static hasMany = [carrito: Carrito]
     
     static constraints = {
-        screenshot(maxSize:1073741824)
+        screenshot(nullable:true,maxSize:1073741824)
        // calificaciones(nullable:true,blank:true)
     }
 }

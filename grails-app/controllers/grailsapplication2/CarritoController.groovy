@@ -82,6 +82,8 @@ class CarritoController {
     }
 
     def delete(Long id) {
+        println "parametros"
+        println params
         def carritoInstance = Carrito.get(id)
         if (!carritoInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'carrito.label', default: 'Carrito'), id])
@@ -96,6 +98,7 @@ class CarritoController {
         }
         catch (DataIntegrityViolationException e) {
             flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'carrito.label', default: 'Carrito'), id])
+           
             redirect(action: "show", id: id)
         }
     }
@@ -108,7 +111,7 @@ class CarritoController {
     def micarrito ={
         
     
-        def user=Usuario.findById(session.usuario.id)
+        def user=Usuario.findById(session.usuario.id[0])
         
         def ultimaCompra=Compra.findByProcesoAndUsuario("carro",user)
         println ultimaCompra.id
@@ -116,7 +119,7 @@ class CarritoController {
         def productos=Carrito.findAllByCompra(ultimaCompra)
 
         [carritoInstanceList1: productos, carritoInstanceTotal1: productos.size()]
-        render(template:"micarrito",model:[carritoInstanceList1: productos, carritoInstanceTotal1: productos.count()])
+       
        
         
     }
@@ -178,7 +181,9 @@ class CarritoController {
         
         def carro=Carrito.findByCompraAndProducto(consultaCompra,producto)
         carro.delete(flush:true)
-        
+         if (params.op=='x')
+            redirect (action:micarrito)
+            else
         redirect (controller:'Producto', action:'show', id:producto.id)
     }
 }

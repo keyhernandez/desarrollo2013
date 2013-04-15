@@ -24,7 +24,11 @@
           <div class="head">Carrito</div>
           <div class="tags">
             <ul>
-              <g:render template="/carrito/micarrito"/>
+              <g:if test="${session.usuario}">
+                <g:render template="/carrito/micarrito"/>
+              </g:if>
+
+             
        
             </ul>
           </div>

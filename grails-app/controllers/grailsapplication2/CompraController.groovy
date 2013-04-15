@@ -12,7 +12,9 @@ class CompraController {
 
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        [compraInstanceList: Compra.list(params), compraInstanceTotal: Compra.count()]
+        def user=Usuario.get(session.usuario.id[0])
+        def compras=Compra.findAllByUsuarioAndProceso(user,'compra')
+        [compraInstanceList: compras, compraInstanceTotal: compras.size()]
     }
 
     def create() {
