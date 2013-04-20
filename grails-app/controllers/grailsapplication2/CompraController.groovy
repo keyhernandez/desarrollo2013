@@ -56,6 +56,10 @@ class CompraController {
 
     def update(Long id, Long version) {
         def compraInstance = Compra.get(id)
+        def usuario=Usuario.findById(session.usuario.id[0])
+        PdfQR x= new PdfQR()
+        compraInstance.factura=x.generarFactura(compraInstance.id)
+        
         if (!compraInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'compra.label', default: 'Compra'), id])
             redirect(action: "list")
@@ -78,7 +82,17 @@ class CompraController {
             render(view: "edit", model: [compraInstance: compraInstance])
             return
         }
-
+File f=new File(usuario.nombre+"-"+id+".pdf")
+        f.delete()
+         sendMail{
+             multipart true
+            to "kmhernandez.11@est.ucab.edu.ve"
+            from "admin@retro.com"
+            subject "Orden de Compra"
+            html "Factura de la compra realizada"
+             attachBytes usuario.nombre+"-"+id+".pdf",'application/pdf',compraInstance.factura
+        }
+        
         flash.message = message(code: 'default.updated.message', args: [message(code: 'compra.label', default: 'Compra'), compraInstance.id])
         redirect(action: "show", id: compraInstance.id)
     }
@@ -101,4 +115,11 @@ class CompraController {
             redirect(action: "show", id: id)
         }
     }
+    
+     def renderFactura() {                              //for pdf file download  
+        def compraInstance = Compra.get(params.id)  
+        response.setContentType('application/pdf')  
+        byte[] pdf = compraInstance.factura 
+        response.outputStream << pdf  
+    } 
 }

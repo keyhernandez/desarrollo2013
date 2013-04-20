@@ -19,15 +19,17 @@
     <g:if test="${flash.message}">
       <div class="message" role="status">${flash.message}</div>
     </g:if>
-    <table>
+    <table >
       <thead>
         <tr>
 
       <g:sortableColumn property="screenshot" title="Screenshot" />
 
+      
+      <g:sortableColumn property="nombre" title="${message(code: 'producto.nombre.label', default: 'Nombre')}" />
+      
       <g:sortableColumn property="descripcion" title="${message(code: 'producto.descripcion.label', default: 'Descripcion')}" />
 
-      <g:sortableColumn property="nombre" title="${message(code: 'producto.nombre.label', default: 'Nombre')}" />
 
       <g:sortableColumn property="precio" title="${message(code: 'producto.precio.label', default: 'Precio')}" />
 
@@ -37,15 +39,16 @@
       <g:each in="${productoInstanceList}" status="i" var="productoInstance">
         <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 
-          <td>
+          <td width=150px align="center">
         <g:link action="show" id="${productoInstance.id}">
-          <img width="25%" height="10%" alt="Img" src="http://localhost:7070/GrailsApplication2/producto/showImage/${productoInstance.id}">
+          <img width="100" height="100" alt="Img" src="http://localhost:7070/GrailsApplication2/producto/showImage/${productoInstance.id}">
         </g:link>
       </td>
 
+             <td>${fieldValue(bean: productoInstance, field: "nombre")}</td>
         <td>${fieldValue(bean: productoInstance, field: "descripcion")}</td>
 
-        <td>${fieldValue(bean: productoInstance, field: "nombre")}</td>
+ 
 
         <td>${fieldValue(bean: productoInstance, field: "precio")}</td>
 

@@ -7,11 +7,19 @@ class Producto {
     byte [] screenshot;
     double precio;
     String categoria;
- 
-  //  static hasMany = [carrito: Carrito]
+    
+    static searchable = {
+        only = ['nombre','descripcion']
+        content: spellCheck 'include'
+    }
+    
     
     static constraints = {
-        screenshot(nullable:true,maxSize:1073741824)
-       // calificaciones(nullable:true,blank:true)
+        screenshot(nullable:true) //,maxSize:1073741824
+        // calificaciones(nullable:true,blank:true)
+    }
+    
+    String toString(){
+        return "${nombre}"
     }
 }

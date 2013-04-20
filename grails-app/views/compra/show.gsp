@@ -9,20 +9,20 @@
 </head>
 <body>
 
-  
-
-          <div id="show-compra" class="content scaffold-show" role="main">
 
 
+  <div id="show-compra" class="content scaffold-show" role="main">
+<section id="content" >
+        <div class="col2" >
+          <div class="dbox">
+            <div class="head">Compra</div>
 
-            <ol class="property-list compra">
 
-              <section id="content">
-    <div class="col3">
-      <div class="dbox">
-        <div class="head">Compra</div>
+    <ol class="property-list compra">
 
-        <ul>
+      
+
+            <ul>
               <g:if test="${compraInstance?.fechaCompra}">
                 <li class="fieldcontain">
                   <span id="fechaCompra-label" class="property-label"><g:message code="compra.fechaCompra.label" default="Fecha de Compra" /></span>
@@ -70,23 +70,17 @@
                 </li>
               </g:if>
 
+              <a href="${createLink(uri:'/compra/renderFactura/'+compraInstance?.id)}">Ver Factura</a> 
+              </ol>
 
+            </ul>
+          </div>
 
-            </ol>
+        </div>
+ 
 
-        </ul>
-      </div>
-           <g:form>
-      <fieldset class="buttons">
-        <g:hiddenField name="id" value="${compraInstance?.id}" />
-        <g:link class="edit" action="edit" id="${compraInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-        <g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-      </fieldset>
-    </g:form>
-    </div>
-
-
-   
-  </div>
-</body>
-</html>
+</section>
+        </div>
+        
+        </body>
+        </html>

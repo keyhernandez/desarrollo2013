@@ -1,10 +1,12 @@
 <%@ page import="grailsapplication2.Carrito" %>
 <%@ page import="grailsapplication2.Producto" %>
+<%@ page import="grailsapplication2.Compra" %>
 <!DOCTYPE html>
 <html>
   <head>
     <meta name="layout" content="main">
   <g:set var="entityName" value="${message(code: 'producto.label', default: 'Producto')}" />
+  <g:set var="compra" value="${new Compra()}" />
   <title>Productos</title>
 </head>
 <body>
@@ -52,7 +54,7 @@
    
     
   </table>
-   <li><a href="${createLink(controller:'Compra',action:'edit',id:19)}">Finalizar</a></li>
+   <li><a href="${createLink(controller:'Compra',action:'edit',id:Compra.ultimaCompra(session.usuario.id[0]))}">Finalizar</a></li>
        
             </ul>
           </div>

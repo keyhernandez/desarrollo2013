@@ -55,6 +55,7 @@ grails.project.dependency.resolution = {
         compile ":openid:0.4.4"
         compile ":mail:1.0.1"
         compile ':cache:1.0.0'
+    //    compile ":searchable-0.6.3"
       
     }
 }

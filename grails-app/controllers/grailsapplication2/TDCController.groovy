@@ -29,7 +29,8 @@ class TDCController {
         }
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'TDC.label', default: 'TDC'), TDCInstance.id])
-        redirect(action: "show", id: TDCInstance.id)
+        redirect(action:"list")
+        //redirect(action: "show", id: TDCInstance.id)
     }
 
     def show(Long id) {

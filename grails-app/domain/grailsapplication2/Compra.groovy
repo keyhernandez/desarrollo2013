@@ -1,6 +1,7 @@
 package grailsapplication2
 import grailsapplication2.Producto
-
+import grailsapplication2.Usuario
+import grailsapplication2.Carrito
 class Compra {
 
     String status;
@@ -9,30 +10,32 @@ class Compra {
     String fechaEntrega;
     TDC tarjeta;
     String proceso;
+    byte [] factura;
     static belongsTo = [usuario:Usuario]
     
     static constraints = {
-        status (nullable: true);
+        status (nullable: true)
         fechaEntrega(nullable:true)
         tarjeta(nullable:true)
         status(nullable:true)
         monto (nullable:true)
         fechaCompra (nullable:true)
-        
+        factura(nullable:true,maxSize:107374182)
     }
     
     def getMonto ( idcompra) {
-       // def compra=Compra.findById(idcompra)
-        ArrayList idproductos= Carrito.executeQuery("select cast(producto_id as long) from Carrito where compra_id= ?",[idcompra])//findAllByCompra(compra)
-      
-        println "ids p $idproductos"
-        def productos= Producto.findAllByIdInList(idproductos)
-     //    def monto = Producto.executeQuery("select cast(sum(precio) as double) from Producto where id in $idproductos")
-     
-     //   PdfQR x= new PdfQR()
-       // x.generarFactura()
        
+        
+        return  Carrito.executeQuery("select sum(subtotal) from Carrito where compra_id= ?",[idcompra])[0]
+    
+    }
+    
+    static ultimaCompra (iduser) {
        
-        return monto
+        def user=Usuario.findById(iduser)
+       
+        def c=Compra.executeQuery("select max(id) from Compra where usuario_id = ? and proceso='carro'",[user.id])[0]
+        
+        return c
     }
 }

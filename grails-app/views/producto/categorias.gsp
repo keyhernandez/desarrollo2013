@@ -8,49 +8,61 @@
   <title>Productos</title>
 </head>
 <body>
-  
-  
+
+
   <div id="list-producto" class="content scaffold-list" role="main">
-    <h1>Productos</h1>
-    <g:if test="${flash.message}">
-      <div class="message" role="status">${flash.message}</div>
-    </g:if>
-    <table>
-      <thead>
-        <tr>
+    <div id="show-producto" class="content scaffold-show" role="main">
+      <section id="content">
+        <div class="dbox">
 
-      <g:sortableColumn property="screenshot" title="${message(code: 'producto.screenshot.label', default: 'Screenshot')}" />
+          <div class="list">
 
-      <g:sortableColumn property="descripcion" title="${message(code: 'producto.descripcion.label', default: 'Descripcion')}" />
+            <g:if test="${flash.message}">
+              <div class="message" role="status">${flash.message}</div>
+            </g:if>
 
-      <g:sortableColumn property="nombre" title="${message(code: 'producto.nombre.label', default: 'Nombre')}" />
+            <table >
+              <thead>
+                <tr>
 
-      <g:sortableColumn property="precio" title="${message(code: 'producto.precio.label', default: 'Precio')}" />
+              <g:sortableColumn property="screenshot" title="${message(code: 'producto.screenshot.label', default: 'Screenshot')}" />
 
-      </tr>
-      </thead>
-      <tbody>
-      <g:each in="${productoInstanceList}" status="i" var="productoInstance">
-        <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+              <g:sortableColumn property="nombre" title="${message(code: 'producto.descripcion.label', default: 'Nombre')}" />
 
-          <td>
-        <g:link action="show" id="${productoInstance.id}">${fieldValue(bean: productoInstance, field: "id")}
-          <img width="25%" height="10%" alt="Img" src="http://localhost:7070/GrailsApplication2/producto/showImage/${productoInstance.id}">
-        </g:link>
-      </td>
+              <g:sortableColumn property="descripcion" title="${message(code: 'producto.nombre.label', default: 'Descripcion')}" />
 
-        <td>${fieldValue(bean: productoInstance, field: "descripcion")}</td>
+              <g:sortableColumn property="precio" title="${message(code: 'producto.precio.label', default: 'Precio')}" />
 
-        <td>${fieldValue(bean: productoInstance, field: "nombre")}</td>
+              </tr>
+              </thead>
+              <tbody>
+              <g:each in="${productoInstanceList}" status="i" var="productoInstance">
+                <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 
-        <td>${fieldValue(bean: productoInstance, field: "precio")}</td>
+                  <td width=200px align="center">
+                <g:link action="show" id="${productoInstance.id}">
+                  <img width="100" height="100" alt="Img" src="http://localhost:7070/GrailsApplication2/producto/showImage/${productoInstance.id}">
+                </g:link>
+                </td>
 
-        </tr>
-      </g:each>
-      </tbody>
-    </table>
-    <div class="pagination">
-      <g:paginate total="${productoInstanceTotal}" />
+                 <td width=250px align="center">${fieldValue(bean: productoInstance, field: "nombre")}</td>
+                <td width=400px align="justified">${fieldValue(bean: productoInstance, field: "descripcion")}</td>
+
+               
+
+                <td width=50px align="center">${fieldValue(bean: productoInstance, field: "precio")}</td>
+
+                </tr>
+              </g:each>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </section>
+      <div class="pagination">
+        <g:paginate total="${productoInstanceTotal}" />
+      </div>
     </div>
   </div>
 </body>

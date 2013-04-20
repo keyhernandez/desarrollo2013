@@ -17,7 +17,6 @@
     </ul>
   </div>
   <div id="show-producto" class="content scaffold-show" role="main">
-
     <section id="content"><!-- Define the content #2 section    <g:form name="carro" url="[action:'micarrito',controller:'Carrito']">  </g:form> -->
       <div class="col1">
         <div class="dbox">
@@ -28,8 +27,8 @@
                 <g:render template="/carrito/micarrito"/>
               </g:if>
 
-             
-       
+
+
             </ul>
           </div>
         </div>
@@ -54,6 +53,7 @@
                   <div class="d">${productoInstance?.descripcion}</div>
                   <div>
                     <div class="but" > 
+
                       <a href="https://twitter.com/share" class="twitter-share-button" data-lang="es" data-hashtags="RetroShop">
                         Twittear </a>
                       <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id))

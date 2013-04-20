@@ -57,32 +57,31 @@
           <li><a href="#">Top sells</a></li>
           <li><a href="#">Especiales</a></li>
           <li><a href="#">Ofertas</a></li>
-          
-            <g:if test="${session.usuario!=null}">
-          <li><a href="${createLink(controller:'Usuario',action:'logout')}">Logout</a></li>
-           </g:if>
-          <g:else>
-            <li><a href="${createLink(controller:'Usuario',action:'login')}">Login</a></li>
-           </g:else>
-          
+
           <g:if test="${session.usuario!=null}">
-             <li><a href="${createLink(controller:'Usuario',action:'show', params:[id:session.usuario.id])}">Perfil ${session.usuario.nombre}</a></li>
+            <li><a href="${createLink(controller:'Usuario',action:'logout')}">Logout</a></li>
           </g:if>
           <g:else>
-             <li><a href="${createLink(controller:'Usuario',action:'create')}">Registro </a></li>
+            <li><a href="${createLink(controller:'Usuario',action:'login')}">Login</a></li>
+          </g:else>
+
+          <g:if test="${session.usuario!=null}">
+            <li><a href="${createLink(controller:'Usuario',action:'show', params:[id:session.usuario.id])}">Perfil ${session.usuario.nombre}</a></li>
+          </g:if>
+          <g:else>
+            <li><a href="${createLink(controller:'Usuario',action:'create')}">Registro </a></li>
           </g:else>
         </ul>
       </div>
 
       <div class="box_currencies"><!-- Define currency switcher -->
-        <g:form controller="Usuario">
-          <g:actionSubmit value="Inicia Sesion" action="list" />
-        </g:form>
+
       </div>
 
       <div class="search"><!-- Define the search element -->
-        <form method="get" action="#">
-          <input type="text" onfocus="if(this.value =='Search' ) this.value=''" onblur="if(this.value=='') this.value='Search'" maxlength="300" size="10" value="Search" name="s">
+
+        <form method="get" action="${createLink(controller:'Producto',action:'search')}">
+          <input type="text" onfocus="if(this.value =='Search' ) this.value=''" onblur="if(this.value=='') this.value='Search'" maxlength="300" size="10" value="Search" name="q">
           <input type="image" alt="" src="${resource(dir: 'images', file: 'search_btn.gif')}">
         </form>
       </div>
@@ -99,7 +98,7 @@
   <nav><!-- Define the navigation menu -->
     <div>
       <ul class="sf-menu">
-        <li><a href="#">Menu 1</a>
+        <li><a href="${createLink(controller:'Producto',action:'categorias',params:[categoria:'Electronica'])}">Electronica</a>
           <ul>
             <li><a href="#">Submenu 1</a></li>
             <li><a href="#">Submenu 2</a></li>
@@ -107,19 +106,13 @@
             <li><a href="#">Submenu 4</a></li>
           </ul>
         </li>
-        <li><a href="#">Menu 2</a>
+        <li><a href="${createLink(controller:'Producto',action:'categorias',params:[categoria:'Laptops'])}">Laptops</a>
           <ul>
             <li><a href="#">Submenu 21</a></li>
             <li><a href="#">Submenu 22</a>
               <ul>
                 <li><a href="#">Submenu a</a></li>
                 <li><a href="#">Submenu b</a>
-                  <ul>
-                    <li><a href="#">Submenu e</a></li>
-                    <li><a href="#">Submenu f</a></li>
-                    <li><a href="#">Submenu g</a></li>
-                    <li><a href="#">Submenu h</a></li>
-                  </ul>
                 </li>
                 <li><a href="#">Submenu c</a></li>
                 <li><a href="#">Submenu d</a></li>
@@ -129,7 +122,7 @@
             <li><a href="#">Submenu 24</a></li>
           </ul>
         </li>
-        <li><a href="#">Menu 3</a>
+        <li><a href="${createLink(controller:'Producto',action:'categorias',params:[categoria:'Tablets'])}">Tablets </a>
           <ul>
             <li><a href="#">Submenu 31</a></li>
             <li><a href="#">Submenu 32</a></li>
@@ -137,19 +130,18 @@
             <li><a href="#">Submenu 34</a></li>
           </ul>
         </li>
-        <li><a href="#">Menu 4</a>
+        <li><a href="${createLink(controller:'Producto',action:'categorias',params:[categoria:'GPS'])}">GPS</a></li>
+        <li><a href="${createLink(controller:'Producto',action:'categorias',params:[categoria:'Celulares'])}">Celulares</a>
           <ul>
-            <li><a href="#">Submenu 41</a></li>
-            <li><a href="#">Submenu 42</a></li>
-            <li><a href="#">Submenu 43</a></li>
-            <li><a href="#">Submenu 44</a></li>
+            <li><a href="${createLink(controller:'Producto',action:'categorias',params:[categoria:'Accesorios'])}">Accesorios</a></li>
+
           </ul>
         </li>
-        <li><a href="#">Menu 5</a></li>
-        <li><a href="#">Menu 6</a></li>
-        <li><a href="#">Menu 7</a></li>
-        <li><a href="#">Menu 8</a></li>
-        <li><a href="#">Menu 9</a></li>
+        <li><a href="${createLink(controller:'Producto',action:'categorias',params:[categoria:'Zapatos'])}">Zapatos</a></li>
+        <li><a href="${createLink(controller:'Producto',action:'categorias',params:[categoria:'Relojes'])}">Relojes</a></li>
+        <li><a href="${createLink(controller:'Producto',action:'categorias',params:[categoria:'Maletas'])}">Maletas</a></li>
+
+
       </ul>
     </div>
   </nav>
