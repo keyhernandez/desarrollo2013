@@ -70,7 +70,7 @@ class CompraController {
         if (version != null) {
             if (compraInstance.version > version) {
                 compraInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                          [message(code: 'compra.label', default: 'Compra')] as Object[],
+                    [message(code: 'compra.label', default: 'Compra')] as Object[],
                           "Another user has updated this Compra while you were editing")
                 render(view: "edit", model: [compraInstance: compraInstance])
                 return
@@ -83,15 +83,23 @@ class CompraController {
             render(view: "edit", model: [compraInstance: compraInstance])
             return
         }
-File f=new File(usuario.nombre+"-"+id+".pdf")
+        File f=new File(usuario.nombre+"-"+id+".pdf")
         f.delete()
-         sendMail{
-             multipart true
-            to "kmhernandez.11@est.ucab.edu.ve"
+        sendMail{
+            multipart true
+            to "$usuario.correo,kmhernandez.11@est.ucab.edu.ve"
             from "admin@retro.com"
             subject "Orden de Compra"
             html "Factura de la compra realizada"
-             attachBytes usuario.nombre+"-"+id+".pdf",'application/pdf',compraInstance.factura
+            attachBytes usuario.nombre+"-"+id+".pdf",'application/pdf',compraInstance.factura
+        }
+        sendMail{
+            
+            to "$usuario.correo,kmhernandez.11@est.ucab.edu.ve"
+            from "admin@retro.com"
+            subject "Califica los productos"
+            html "Te recordamos que debes calificar los productos de tu compra a traves del siguiente link http://localhost:7070/GrailsApplication2/calificacion/productos"
+            
         }
         
         flash.message = message(code: 'default.updated.message', args: [message(code: 'compra.label', default: 'Compra'), compraInstance.id])
@@ -117,14 +125,14 @@ File f=new File(usuario.nombre+"-"+id+".pdf")
         }
     }
     
-     def renderFactura() {                              //for pdf file download  
+    def renderFactura() {                              //for pdf file download  
         def compraInstance = Compra.get(params.id)  
         response.setContentType('application/pdf')  
         byte[] pdf = compraInstance.factura 
         response.outputStream << pdf  
     } 
     
-      def entrega(){
+    def entrega(){
         def compraInstance = Compra.get(params.id)
         compraInstance.fechaEntrega= new Date().format("dd/MM/yyyy HH:mm")
         compraInstance.status="Entregada"

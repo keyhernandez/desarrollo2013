@@ -122,14 +122,16 @@ class CalificacionController {
             p.add(car.producto)
         }
         ArrayList<Producto> products=new ArrayList<Producto>()
-//       def calificaciones=Calificacion.findAllByUsuario(user)
-//        for (pr in p){
-//            calificaciones.find()
-//       } 
+       def calificaciones=Calificacion.findAllByUsuario(user)
+        for (pr in p){
+            if (!Calificacion.findAllByUsuarioAndProducto(user,pr)){
+                products.add(pr)
+            }
+       } 
 //       
         
         
-        [productoInstanceList : p, productoInstanceTotal:p.size()]
+        [productoInstanceList : products, productoInstanceTotal:products.size()]
 
     }
 }
