@@ -1,5 +1,6 @@
 
 <%@ page import="grailsapplication2.Producto" %>
+<%@ page import="grailsapplication2.Calificacion" %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -70,6 +71,35 @@
 
 
             </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col2">
+        <div class="dbox">
+          <div class="head">Calificaciones / Comentarios </div>
+          <div class="blist">
+            <g:if test="${grailsapplication2.Calificacion.findAllByProducto(productoInstance)}">
+
+              <table>
+                <thead>
+                  <tr>
+                <g:sortableColumn property="puntuacion" title="Puntuacion" />
+                <g:sortableColumn property="comentario" title="Comentario" />
+                <g:sortableColumn property="usuario" title="Usuario" />
+                </tr>
+                </thead>
+                <tbody>
+                <g:each in="${grailsapplication2.Calificacion.findAllByProducto(productoInstance)}" status="i"var="c"> 
+                  <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+                    <td>${fieldValue(bean: c, field: "puntuacion")}</td>
+                    <td>${fieldValue(bean: c, field: "comentario")}</td>
+                    <td>${c.usuario.nombre}</td>
+                  </tr>
+                </g:each>
+                </tbody>
+              </table>
+
+            </g:if>
           </div>
         </div>
       </div>

@@ -31,4 +31,7 @@ class Usuario {
         direccion (nullable:false,blank:false)
         fechaNac (nullable:false,blank:false)
     }
+    String toString(){
+        return "${nombre}"
+    }
 }

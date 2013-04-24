@@ -1,5 +1,6 @@
 package grailsapplication2
 
+import grails.converters.*
 import org.springframework.dao.DataIntegrityViolationException
 
 class CompraController {
@@ -122,4 +123,12 @@ File f=new File(usuario.nombre+"-"+id+".pdf")
         byte[] pdf = compraInstance.factura 
         response.outputStream << pdf  
     } 
+    
+      def entrega(){
+        def compraInstance = Compra.get(params.id)
+        compraInstance.fechaEntrega= new Date().format("dd/MM/yyyy HH:mm")
+        compraInstance.status="Entregada"
+        compraInstance.save(flush:true)
+        render compraInstance as XML
+    }
 }

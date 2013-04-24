@@ -33,7 +33,7 @@ public class PdfQR {
     DocumentException, UnsupportedEncodingException {
      
         def compra=Compra.findById(idcompra)
-    
+    def monto=compra.getMonto(idcompra)
         def usuario=Usuario.findById(compra.usuario.id)
         Document document = new Document(new Rectangle(PageSize.A4));
         FileOutputStream factura=new FileOutputStream(usuario.nombre+"-"+idcompra+".pdf") 
@@ -68,12 +68,13 @@ public class PdfQR {
         //   table.addCell(cell2);
         document.add(table);
         
-        document.add(new Paragraph("Monto total: "+compra.monto))
+        document.add(new Paragraph("Monto total: "+monto))
         //QR Code Barcode
-        BarcodeQRCode qrcode = new BarcodeQRCode("www.google.com", 5, 5, null);
+        BarcodeQRCode qrcode = new BarcodeQRCode("http://localhost:7070/GrailsApplication2/compra/entrega/$idcompra", 5, 5, null);
         Image image = qrcode.getImage();
         image.scalePercent(400,400)
         //Add Barcode to PDF document
+        document.add(new Paragraph("Para uso interno"))
         document.add(image);
         
         File path= new File(usuario.nombre+"-"+idcompra+".pdf")

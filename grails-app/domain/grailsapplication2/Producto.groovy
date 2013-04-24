@@ -15,7 +15,7 @@ class Producto {
     
     
     static constraints = {
-        screenshot(nullable:true) //,maxSize:1073741824
+        screenshot(nullable:true,maxSize:1073741824) //,maxSize:1073741824
         // calificaciones(nullable:true,blank:true)
     }
     

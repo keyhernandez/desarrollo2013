@@ -68,7 +68,7 @@ class ProductoController {
         if (version != null) {
             if (productoInstance.version > version) {
                 productoInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                          [message(code: 'producto.label', default: 'Producto')] as Object[],
+                    [message(code: 'producto.label', default: 'Producto')] as Object[],
                           "Another user has updated this Producto while you were editing")
                 render(view: "edit", model: [productoInstance: productoInstance])
                 return
@@ -105,7 +105,7 @@ class ProductoController {
         }
     }
     
-     def showImage = {
+    def showImage = {
         def imagen = Producto.get( params.id )
         response.outputStream << imagen.screenshot
         response.outputStream.flush()
@@ -120,19 +120,20 @@ class ProductoController {
         [productoInstanceList : productos, productoInstanceTotal:Producto.count()]
     }
     
+    
     def search = {
         if (!params.q?.trim()) {
             return [:]
         }
         try {
             String searchTerm = WILDCARD+ params.q + WILDCARD
-         //   println (Producto.search("*Apple*"))
+            //   println (Producto.search("*Apple*"))
             return [searchResult: searchableService.search(searchTerm, params)] //searchTerm, params
         } catch (SearchEngineQueryParseException ex) {
             return [parseException: true]
         }
     }
-  def indexAll = {
+    def indexAll = {
         Thread.start {
             searchableService.index()
         }

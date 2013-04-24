@@ -37,17 +37,8 @@
               </div>
 
               <g:if test="${haveQuery && !haveResults && !parseException}">
-                <p>Nothing matched your query - <strong>${params.q}</strong></p>
-                <g:if test="${!searchResult?.suggestedQuery}">
-                  <p>Suggestions:</p>
-                  <ul>
-                    <li>Try a suggested query: <g:link controller="producto" action="search" params="[q: params.q, suggestQuery: true]">Search again with the <strong>suggestQuery</strong> option</g:link><br />
-                    <em>Note: Suggestions are only available when classes are mapped with <strong>spellCheck</strong> options, either at the class or property level.<br />
-                      The simplest way to do this is add <strong>spellCheck "include"</strong> to the domain class searchable mapping closure.<br />
-                      See the plugin/Compass documentation Mapping sections for details.</em>
-                    </li>
-                  </ul>
-                </g:if>
+                <p>No se encontraron resultados para la busqueda de - <strong>${params.q}</strong></p>
+              
               </g:if>
 
               <g:if test="${searchResult?.suggestedQuery}">
@@ -70,16 +61,16 @@
                   </g:if>
                 </ul>
               </g:if>
-              <table>
+              <table width="500" align="center">
                 <tbody>
               <g:if test="${haveResults}">
                 <div class="list">
                   <g:each var="result" in="${searchResult.results}" status="index">
                     <tr class="${(index % 2) == 0 ? 'even' : 'odd'}">
 
-                      <td>
+                      <td >
                     <g:link action="show" id="${result.id}">
-                      <img width="15%" height="15%" alt="Img" src="http://localhost:7070/GrailsApplication2/producto/showImage/${result.id}">
+                      <img width="100" height="100" alt="Img" src="http://localhost:7070/GrailsApplication2/producto/showImage/${result.id}">
                     </g:link>
                     </td>
 

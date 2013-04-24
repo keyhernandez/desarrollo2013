@@ -10,15 +10,19 @@
 <body>
 
   <div id="list-TDC" class="content scaffold-list" role="main">
-    <h1><g:message code="default.list.label" args="[entityName]" /></h1>
-    <g:if test="${flash.message}">
-      <div class="message" role="status">${flash.message}</div>
-    </g:if>
+   
+    <section id="content"><!-- Define the content #2 section    <g:form name="carro" url="[action:'micarrito',controller:'Carrito']">  </g:form> -->
+      <div class="col3">
+        <div class="dbox">
+          <div class="head">Tarjetas</div>
+          <div class="tags">
+            <ul>
+    
     <table>
       <thead>
         <tr>
 
-      <g:sortableColumn property="fechaVence" title="${message(code: 'TDC.fechaVence.label', default: 'Fecha Vence')}" />
+      <g:sortableColumn property="fechaVence" title="${message(code: 'TDC.fechaVence.label', default: 'Fecha Vencimiento')}" />
 
       <g:sortableColumn property="marca" title="${message(code: 'TDC.marca.label', default: 'Marca')}" />
 
@@ -48,6 +52,13 @@
       </g:each>
       </tbody>
     </table>
+              
+            </ul>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
     <div class="pagination">
       <g:paginate total="${TDCInstanceTotal}" />
     </div>

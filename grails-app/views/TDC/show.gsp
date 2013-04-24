@@ -23,16 +23,7 @@
 			</g:if>
 			<ol class="property-list TDC">
 			
-				<g:if test="${TDCInstance?.compras}">
-				<li class="fieldcontain">
-					<span id="compras-label" class="property-label"><g:message code="TDC.compras.label" default="Compras" /></span>
-					
-						<g:each in="${TDCInstance.compras}" var="c">
-						<span class="property-value" aria-labelledby="compras-label"><g:link controller="compra" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></span>
-						</g:each>
-					
-				</li>
-				</g:if>
+				
 			
 				<g:if test="${TDCInstance?.fechaVence}">
 				<li class="fieldcontain">
