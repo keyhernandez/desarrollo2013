@@ -90,7 +90,7 @@
     <div class="logo"><!-- Define the logo element -->
       <a href="${createLink(uri: '/')}">
         <h1>Retro Shop SK</h1>
-        <h3>Susana - Keyla</h3>
+        <h3></h3>
       </a>
     </div>
   </header>

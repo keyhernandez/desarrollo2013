@@ -20,7 +20,7 @@
 
     <section id="content"><!-- Define the content section -->
         <div class="dbox">
-            <div class="head">Productos Populares <g:link controller="Producto" action="create">INICIAR APLICACION</g:link> </div>
+            <div class="head">Productos Populares </div>
             <div class="list">
                 <ul>
                     <li>

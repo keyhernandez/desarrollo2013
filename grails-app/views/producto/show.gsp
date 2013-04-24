@@ -49,7 +49,7 @@
                 </div>
                 <div class="desc">
                   <div class="d"><span>Date Added:</span> Thursday 27 March, 2012</div>
-                  <h2><a href="${createLink(controller:'Carrito',action:'agregarAlcarro',params:[idp:productoInstance?.id,cantidad:1])}">${productoInstance?.nombre}</a></h2>
+                  <h2><a >${productoInstance?.nombre}</a></h2>
                   <div class="d">Precio: <div class="price">Bs. ${productoInstance?.precio}</div></div>
                   <div class="d">${productoInstance?.descripcion}</div>
                   <div>
@@ -62,7 +62,21 @@
                       (document,"script","twitter-wjs");
                       </script>
                     </div>
-                    <div class="but"><p><a>Agrega al Carro</a></p><p></p></div>
+                    <g:if test="${session.usuario!=null}">
+                      <g:if test="${grailsapplication2.TDC.findByUsuario(session.usuario[0])!=null}">
+                        <div class="but">
+                        <p>
+                          <a href="${createLink(controller:'Carrito',action:'agregarAlcarro',params:[idp:productoInstance?.id,cantidad:1])}">Agrega al Carro</a>
+                        </p><p></p>
+                      </div>
+                      </g:if>
+                      <g:else>
+                        <h3>Registra un metodo de pago, para poder agregar al carro</h3>
+                      </g:else>
+                    </g:if>
+                     <g:else>
+                       <h3>Haz login para agregar al carro</h3>
+                     </g:else>
                   </div>
                 </div>
               </li>
