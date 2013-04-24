@@ -87,7 +87,7 @@ class CompraController {
         f.delete()
         sendMail{
             multipart true
-            to "$usuario.correo,kmhernandez.11@est.ucab.edu.ve"
+            to "$usuario.correo","kmhernandez.11@est.ucab.edu.ve"
             from "admin@retro.com"
             subject "Orden de Compra"
             html "Factura de la compra realizada"
@@ -95,7 +95,7 @@ class CompraController {
         }
         sendMail{
             
-            to "$usuario.correo,kmhernandez.11@est.ucab.edu.ve"
+            to "$usuario.correo","kmhernandez.11@est.ucab.edu.ve"
             from "admin@retro.com"
             subject "Califica los productos"
             html "Te recordamos que debes calificar los productos de tu compra a traves del siguiente link http://localhost:7070/GrailsApplication2/calificacion/productos"

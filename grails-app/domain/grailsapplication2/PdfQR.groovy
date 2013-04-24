@@ -59,10 +59,15 @@ public class PdfQR {
         PdfPCell cell1 = new PdfPCell(new Paragraph("Producto"));
         PdfPCell cell2 = new PdfPCell(new Paragraph("Monto"));
         
-        p.each{pr ->  table.addCell(new PdfPCell(new Paragraph(pr.nombre)));//document.add(new Paragraph(pr.nombre))
-            //document.add(new Paragraph(pr.descripcion))
+        for (int i=0;i<p.size();i++){
+            table.addCell(new PdfPCell(new Paragraph(p.get(i).nombre)))
+            table.addCell(new PdfPCell(new Paragraph(subtotales.get(i).toString())))
         }
-        subtotales.each{ x -> table.addCell(new PdfPCell(new Paragraph(x.toString())))}
+        
+//        p.each{pr ->  table.addCell(new PdfPCell(new Paragraph(pr.nombre)));//document.add(new Paragraph(pr.nombre))
+//            //document.add(new Paragraph(pr.descripcion))
+//        }
+//        subtotales.each{ x -> table.addCell(new PdfPCell(new Paragraph(x.toString())))}
         
         //   table.addCell(cell1);
         //   table.addCell(cell2);

@@ -49,7 +49,7 @@
                 </div>
                 <div class="desc">
                   <div class="d"><span>Date Added:</span> Thursday 27 March, 2012</div>
-                  <h2><a href="${createLink(controller:'Carrito',action:'agregarAlcarro',params:[idp:productoInstance?.id,cantidad:5])}">${productoInstance?.nombre}</a></h2>
+                  <h2><a href="${createLink(controller:'Carrito',action:'agregarAlcarro',params:[idp:productoInstance?.id,cantidad:1])}">${productoInstance?.nombre}</a></h2>
                   <div class="d">Precio: <div class="price">Bs. ${productoInstance?.precio}</div></div>
                   <div class="d">${productoInstance?.descripcion}</div>
                   <div>

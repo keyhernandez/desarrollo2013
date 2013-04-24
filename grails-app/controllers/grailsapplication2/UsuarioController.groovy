@@ -28,7 +28,7 @@ class UsuarioController {
             return
         }
         sendMail{
-            to "$usuarioInstance.correo,kmhernandez.11@est.ucab.edu.ve"
+            to "$usuarioInstance.correo","kmhernandez.11@est.ucab.edu.ve"
             from "admin@retro.com"
             subject "Bienvenido a Retro Shop - Activa tu Cuenta"
             html "Te has registrado en Retro Shop! \n Para comenzar, haz click en el siguiente link  http://localhost:7070/GrailsApplication2/usuario/show/$usuarioInstance.id"
@@ -42,7 +42,7 @@ class UsuarioController {
         def usuarioInstance = Usuario.get(id)
         [usuarioInstance: usuarioInstance]
         flash.message= "Bienvenido $usuarioInstance.nombre, revisa tu correo para activar tu cuenta"
-        redirect (uri:'/')
+      //  redirect (uri:'/')
        
     }
 

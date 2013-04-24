@@ -9,12 +9,10 @@
 </head>
 <body>
 
-
-  <div id="show-usuario" class="content scaffold-show" role="main">
-    <h1> Activa tu cuenta </h1>
-    <g:if test="${flash.message}">
-      <div class="message" role="status">${flash.message}</div>
-    </g:if>
+  <section id="content">
+ <div class="col3">
+      <div class="dbox">
+        <div class="head">Revisa tu correo</div>
     <ol class="property-list usuario">
 
 
@@ -27,16 +25,10 @@ Bienvenid@ ${usuarioInstance?.nombre}!,
 
     </ol>
     <g:form>
-      <fieldset class="buttons">
-        <g:hiddenField name="id" value="${usuarioInstance?.id}" />
 
-        <g:form>
-
-          <g:actionSubmit value="Continuar" action="${createLink(uri: '/')}" /> 
-        </g:form> 
-      </fieldset>
     </g:form>
-  </div>
+      </div> </div>
+  </section>
 </body>
 </html>
 
