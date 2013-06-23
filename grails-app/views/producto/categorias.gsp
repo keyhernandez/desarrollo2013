@@ -41,7 +41,7 @@
 
                   <td width=200px align="center">
                 <g:link action="show" id="${productoInstance.id}">
-                  <img width="100" height="100" alt="Img" src="http://localhost:7070/GrailsApplication2/producto/showImage/${productoInstance.id}">
+                  <img width="100" height="100" alt="Img" src="${createLink(controller:'producto', action:'showImage', id:productoInstance?.id)}">
                 </g:link>
                 </td>
 

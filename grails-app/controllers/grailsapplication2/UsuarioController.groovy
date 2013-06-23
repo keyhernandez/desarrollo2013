@@ -125,8 +125,14 @@ class UsuarioController {
     }
     
     def login = { 
-        
+        def view="login"
+        withMobileDevice {
+            view = "loginm"
+        }
+
+       render(view: view)
     }
+    def loginm = {}
     def loggedin = { 
         def token=session.openidIdentifier
         def user=Usuario.executeQuery("from Usuario where token= ?",[token])

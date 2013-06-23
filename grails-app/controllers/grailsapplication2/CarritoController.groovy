@@ -157,7 +157,7 @@ class CarritoController {
         }
         else {
             if (consultaCompra.proceso!='carro')
-            { println "else 1"
+            { 
                 def compra=new Compra(monto:123,proceso:'carro',usuario:user)
                 compra.save(flush:true)
                 println(compra.id)

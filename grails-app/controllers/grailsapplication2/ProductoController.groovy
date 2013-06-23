@@ -18,7 +18,10 @@ class ProductoController {
         params.max = Math.min(max ?: 10, 100)
         [productoInstanceList: Producto.list(params), productoInstanceTotal: Producto.count()]
     }
-
+    def listm(Integer max) {
+        params.max = Math.min(max ?: 10, 100)
+        [productoInstanceList: Producto.list(params), productoInstanceTotal: Producto.count()]
+    }
     def create() {
         [productoInstance: new Producto(params)]
     }
@@ -35,6 +38,18 @@ class ProductoController {
     }
 
     def show(Long id) {
+        def productoInstance = Producto.get(id)
+        
+        if (!productoInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'producto.label', default: 'Producto'), id])
+            redirect(action: "list")
+            return
+        }
+
+        [productoInstance: productoInstance]
+    }
+    
+    def showm(Long id) {
         def productoInstance = Producto.get(id)
         
         if (!productoInstance) {
@@ -120,7 +135,16 @@ class ProductoController {
         [productoInstanceList : productos, productoInstanceTotal:Producto.count()]
     }
     
+      def categoriasm(Integer max, String categoria){
+        params.max = 6//Math.min(max ?: 10, 100)
+        def productos= Producto.executeQuery("from Producto where categoria= ?", [categoria])
+        println(productos)
+        [productoInstanceList : productos, productoInstanceTotal:Producto.count()]
+    }
     
+    def menucategorias(){
+    render(view:"menucategorias")
+}    
     def search = {
         if (!params.q?.trim()) {
             return [:]
