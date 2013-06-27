@@ -51,11 +51,18 @@ class BusquedaProductosController {
             //render p + '<br>'
 
         } else if (tipo_busqueda == 'ilike') {
+            println "argumento" + argumento_ilike + valor_ilike
             //render objeto == Producto + "<br>"
-            p = objeto.findAll(sort: 'id') {
-                argumento_ilike =~ valor_ilike
+            //            p = objeto.findAll(sort: 'id') {
+            //                //argumento_ilike =~ valor_ilike
+            //                nombre =~ 'apple'
+            //           
+            //            }
+            
+            p = Producto.withCriteria {
+                ilike('nombre','%'+valor_ilike+'%')
             }
-
+            println "resultado  "+p
         }
 
         // cuantos registros en total tiene el objeto
@@ -98,7 +105,7 @@ class BusquedaProductosController {
         p = p[inicio_lista..fin_lista]
         // agregar los datos de
         p.add(0, [r_count: r_count, pag_actual: pag_actual, reg_pagina: reg_pagina,
-                  num_paginas: num_paginas, prev_page: prev_page, next_page: next_page])
+                num_paginas: num_paginas, prev_page: prev_page, next_page: next_page])
         return p
 
     }
@@ -112,11 +119,12 @@ class BusquedaProductosController {
      */
     def producto_id = {
         if (request.method == 'GET') {
-            def p = Producto.findById(params.id)
+           
+            def p = Producto.findById(params.s)
             // la instancia retorna null en caso de
             // no obtener registros en el query
             if (p){
-               render p as XML
+                render p as XML
             } else {
                 render 'Error, no existe un producto con ese ID \n'
             }
@@ -128,7 +136,7 @@ class BusquedaProductosController {
      *
      * La paginacion es /rest/productos/$pag? donde pag equivale al numero de pagina, iniciando en 1.
      *
-      */
+     */
     def productos = {
         String pag
         if (params.pag != null){
@@ -145,50 +153,63 @@ class BusquedaProductosController {
 
             /*
             def prods = Producto.findAll(sort: 'id') {
-                categoria =~ params.cat
+            categoria =~ params.cat
             }
             //render 'Prods: ' + prods + '\n'
             render 'Aqui hay: ' + prods.size() + '\n'
 
             render 'Pagina: ' + params.pag.toInteger() + '\n'
             render 'Categoria: ' + params.cat + '\n'
-            */
-
-            render paginador(Producto, params.pag.toInteger(), 10, 'ilike', 'categoria', params.cat) as JSON
+             */
+            println "param"+params
+            render paginador(Producto, params.s.toInteger(), 10, 'ilike', 'categoria', params.cat) as JSON
 
             //for (x in paginador(Producto, params.pag.toInteger(), 12, 'ilike', 'categoria', 'laptops')){
             //    render x.id + ': ' + x.nombre + '\n'
             //}
         }
     }
+    
+    def nombre_producto = {
+        if (request.method == 'GET'){
+  
+            render paginador(Producto, params.s.toInteger(), 10, 'ilike', 'nombre', params.cat) as JSON
+
+            //for (x in paginador(Producto, params.pag.toInteger(), 12, 'ilike', 'categoria', 'laptops')){
+            //    render x.id + ': ' + x.nombre + '\n'
+            //}
+        }
+    }
+    
+    
     /**
      * Servicio de colocar calificaciones a los productos
      */
     def colocar_puntuacion = {
-       if (request.method == 'POST') {
+        if (request.method == 'POST') {
 
-           def comentario = request.XML.comentario.toString()
-           def producto_id = request.XML.producto_id.toString()
-           def puntuacion = request.XML.puntuacion.toString()
-           def usuario_id = request.XML.usuario_id.toString()
+            def comentario = request.XML.comentario.toString()
+            def producto_id = request.XML.producto_id.toString()
+            def puntuacion = request.XML.puntuacion.toString()
+            def usuario_id = request.XML.usuario_id.toString()
 
-           def p = Producto.findById(producto_id)
-           def u = Usuario.findById(usuario_id)
-           def punt = new Calificacion(comentario: comentario,
-                                       producto: p,
-                                       puntuacion: puntuacion,
-                                       usuario: u)
+            def p = Producto.findById(producto_id)
+            def u = Usuario.findById(usuario_id)
+            def punt = new Calificacion(comentario: comentario,
+                producto: p,
+                puntuacion: puntuacion,
+                usuario: u)
 
-           if (punt.save()){
-               render '\n\n\nFunciono\n\n\n'
-               response.status = 201 // Created
-               render punt as XML
-           } else {
-               render '\n\n\nXXX\n\n\n'
-               response.status = 500 //Internal Server Error
-               render "No se pudo crear un comentario... Este fue el error:\n ${punt.errors}"
-           }
-       }
+            if (punt.save()){
+                render '\n\n\nFunciono\n\n\n'
+                response.status = 201 // Created
+                render punt as XML
+            } else {
+                render '\n\n\nXXX\n\n\n'
+                response.status = 500 //Internal Server Error
+                render "No se pudo crear un comentario... Este fue el error:\n ${punt.errors}"
+            }
+        }
 
     }
 

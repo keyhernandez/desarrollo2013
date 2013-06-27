@@ -22,7 +22,6 @@
      
     <div data-role="content" style=" background-color: buttonface;">
    
- 
      <div class="ui-grid-b">
             <div class="ui-block-a">
               <a href="">
@@ -68,8 +67,10 @@
 
    
 
-    </div>
-    <div data-role="footer">
+    </div><div data-theme="a" data-role="footer" data-position="fixed">
+        <h5>
+            Desarrollo
+        </h5>
     </div>
   </body>
 </html>
