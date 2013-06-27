@@ -68,46 +68,51 @@ class BusquedaProductosController {
         // cuantos registros en total tiene el objeto
         def r_count = p.size()
 
-        // redondear hacia arriba siempre el numero de paginas
-        def num_paginas = Math.ceil(r_count / reg_pagina).toInteger()
+        if (r_count>0){
+            // redondear hacia arriba siempre el numero de paginas
+            def num_paginas = Math.ceil(r_count / reg_pagina).toInteger()
 
-        // definir si la division del numero de paginas deja residuo
-        def registros_ultima_pagina = r_count % reg_pagina
+            // definir si la division del numero de paginas deja residuo
+            def registros_ultima_pagina = r_count % reg_pagina
 
-        // registro del que se iniciara el slice de la lista
-        def inicio_actual = (pag_actual * reg_pagina) - reg_pagina + 1
+            // registro del que se iniciara el slice de la lista
+            def inicio_actual = (pag_actual * reg_pagina) - reg_pagina + 1
 
-        // registro del que se finalizara el slice de la lista cuando no es la ultima
-        def fin_actual = pag_actual * reg_pagina
+            // registro del que se finalizara el slice de la lista cuando no es la ultima
+            def fin_actual = pag_actual * reg_pagina
 
-        // hay pagina siguiente? hay pagina anterior?
-        //
-        // definir pagina anterior
-        def prev_page = false
-        if (pag_actual > 1){
-            prev_page = pag_actual - 1
+            // hay pagina siguiente? hay pagina anterior?
+            //
+            // definir pagina anterior
+            def prev_page = false
+            if (pag_actual > 1){
+                prev_page = pag_actual - 1
+            }
+            // definir pagina siguiente
+            def next_page = false
+            if (pag_actual < num_paginas){
+                next_page = pag_actual + 1
+            }
+
+            // rangos exactos para el slice
+            def inicio_lista = inicio_actual - 1
+            // definir el final exacto
+            // y aqui si es la ultima pagina
+            def fin_lista = fin_actual -1
+            if (pag_actual == num_paginas & registros_ultima_pagina != 0){
+                fin_lista = inicio_lista + registros_ultima_pagina - 1
+            }
+            // hacer slicing
+            p = p[inicio_lista..fin_lista]
+            // agregar los datos de
+            p.add(0, [r_count: r_count, pag_actual: pag_actual, reg_pagina: reg_pagina,
+                    num_paginas: num_paginas, prev_page: prev_page, next_page: next_page])
+    
+            return p
         }
-        // definir pagina siguiente
-        def next_page = false
-        if (pag_actual < num_paginas){
-            next_page = pag_actual + 1
+        else { 
+            return 0 
         }
-
-        // rangos exactos para el slice
-        def inicio_lista = inicio_actual - 1
-        // definir el final exacto
-        // y aqui si es la ultima pagina
-        def fin_lista = fin_actual -1
-        if (pag_actual == num_paginas & registros_ultima_pagina != 0){
-            fin_lista = inicio_lista + registros_ultima_pagina - 1
-        }
-        // hacer slicing
-        p = p[inicio_lista..fin_lista]
-        // agregar los datos de
-        p.add(0, [r_count: r_count, pag_actual: pag_actual, reg_pagina: reg_pagina,
-                num_paginas: num_paginas, prev_page: prev_page, next_page: next_page])
-        return p
-
     }
 
     /**
@@ -172,15 +177,16 @@ class BusquedaProductosController {
     
     def nombre_producto = {
         if (request.method == 'GET'){
-  
-            render paginador(Producto, params.s.toInteger(), 10, 'ilike', 'nombre', params.cat) as JSON
-
-            //for (x in paginador(Producto, params.pag.toInteger(), 12, 'ilike', 'categoria', 'laptops')){
-            //    render x.id + ': ' + x.nombre + '\n'
-            //}
+            println "param"+params
+        
+            def buscar = paginador(Producto, params.s.toInteger(), 10, 'ilike', 'nombre', params.cat)
+            if (buscar!=0)
+            render buscar as JSON
+            else
+            render "No hay productos con esa caracteristica"
+        
         }
     }
-    
     
     /**
      * Servicio de colocar calificaciones a los productos
