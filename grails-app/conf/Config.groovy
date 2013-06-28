@@ -102,3 +102,9 @@ log4j = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 }
+
+// parametros de la documentacion
+grails.doc.authors = "Susana y Keyla"
+grails.doc.license = "GNU GPL Ver 3.0"
+grails.doc.copyright = "(c) by Susana & Keyla, Todos los derechos reservados."
+grails.doc.footer = "Esta documentacion fue generada por Grails, Proyecto Desarrollo, 2013."

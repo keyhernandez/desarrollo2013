@@ -76,7 +76,7 @@ environments {
            // Usuario
            username = "desa"
            password = "123456"
-           url = "jdbc:oracle:thin:@127.0.0.1:8080:XE"
+           url = "jdbc:oracle:thin:@127.0.0.1:1521:XE"
        }
    }
    // Entorno de Produccion
@@ -86,7 +86,7 @@ environments {
            // Usuario
            username = "desa"
            password = "123456"
-           url = "jdbc:oracle:thin:@127.0.0.1:8080:XE"
+           url = "jdbc:oracle:thin:@127.0.0.1:1521:XE"
        }
    }
 }

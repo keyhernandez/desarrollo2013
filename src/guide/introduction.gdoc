@@ -1,0 +1,27 @@
+As a summary this warehouse demo application will allow you to explore the core concepts of Grails,
+the powerful java-based development framework in the following ways:
+* use a real-world example to create a software design
+* model the design in Grails domain-classes
+* generate the data persistence layer
+* generate the application logic layer
+* generate the front-end
+* perform the tests of the application
+* generate the documentation (which you are reading right now)
+
+Keep in mind, how much effort went into building this server and client side object-relational JEE application with
+(some) persistence:
+
+{table}
+*Activity*|*Number*
+lines of code | 25
+grails commands | 10
+{table}
+
+{table}
+*Footprint *|* Number*
+files| 134
+folders| 43
+total size (kb)| 823
+{table}
+
+Even though the example is relatively simple, we hope you enjoyed the exercise.
