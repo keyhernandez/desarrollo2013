@@ -31,7 +31,16 @@ class UrlMappings {
           */
         "/rest/puntuacion/$prod_id?"(controller:"BusquedaProductos", action:"colocar_puntuacion")
 
-        "/rest/test/"(controller:"BusquedaProductos", action:"test")
+
+
+        /**
+        * lectura de rest
+        */
+        "/rest/json_test/"(controller:"Prorest", action:"json_test")
+        "/rest/json_test_noa/"(controller:"Prorest", action:"json_test_noa")
+
+        "/rest/productos_rest/"(controller:"Prorest", action:"productos_rest")
+        "/rest/productos_rest_id/$id?"(controller:"Prorest", action:"productos_rest_id")
 
 
         "/"(view: "/index")

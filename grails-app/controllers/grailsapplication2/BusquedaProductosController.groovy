@@ -123,8 +123,6 @@ class BusquedaProductosController {
             try {
                 id = params.id.toInteger()
                 if (id > 0 & id < Producto.count()) {
-                    println '\n\nEs mayor\n\n'
-                    println Producto.count()
 
                     def p = Producto.findById(params.id)
                     // la instancia retorna null en caso de
@@ -136,7 +134,6 @@ class BusquedaProductosController {
                 }
 
             } catch (Throwable e) {
-                println e
                 render 'Error, no existe un producto con ese ID \n'
             }
 
@@ -210,19 +207,4 @@ class BusquedaProductosController {
         return 'Hello!!'
     }
 
-
-    def test = {
-        // obtener objeto request con el URL del proveedor del API
-        def url = new URL("http://localhost:7070/GrailsApplication2/rest/producto_id/139")
-        // parsear el objeto request por json
-        def response = JSON.parse(url.newReader()) 
-        if (1 instanceof Integer) {
-            println 'Lo es!!'
-        }
-        //loop de indice = valor
-        response.each { key, value ->
-            println "$key = $value"
-        }
-        //render response.toString()
-    }
 }
