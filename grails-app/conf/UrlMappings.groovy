@@ -19,6 +19,9 @@ class UrlMappings {
                  "/rest/nombre_producto/$cat?/$s"(controller:"BusquedaProductos",action:"nombre_producto"){
             action = [GET:"show",PUT:"update",POST:"save"]
                 }
+                
+         "/rest/test/"(controller:"BusquedaProductos", action:"test")
+        "/rest/consumirServicio/"(controller:"BusquedaProductos", action:"consumirServicio")
 		"/"(view:"/index")
 		"500"(view:'/error')
         "/"(controller:'index',action:'index')

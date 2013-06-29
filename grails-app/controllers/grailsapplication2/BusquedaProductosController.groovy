@@ -1,6 +1,10 @@
 package grailsapplication2
-
+import groovyx.net.http.*
 import grails.converters.*
+import com.itextpdf.text.pdf.ByteBuffer
+import com.itextpdf.text.pdf.ByteBuffer
+import org.json.simple.JSONObject
+import org.codehaus.groovy.grails.web.json.JSONArray
 
 /**
  * Controladores del API de busqueda de productos:
@@ -62,6 +66,7 @@ class BusquedaProductosController {
             p = Producto.withCriteria {
                 ilike('nombre','%'+valor_ilike+'%')
             }
+              
             println "resultado  "+p
         }
 
@@ -156,16 +161,7 @@ class BusquedaProductosController {
         if (request.method == 'GET'){
             //render 'Pag: ' + params.pag + ' y categoria: ' + params.cat
 
-            /*
-            def prods = Producto.findAll(sort: 'id') {
-            categoria =~ params.cat
-            }
-            //render 'Prods: ' + prods + '\n'
-            render 'Aqui hay: ' + prods.size() + '\n'
-
-            render 'Pagina: ' + params.pag.toInteger() + '\n'
-            render 'Categoria: ' + params.cat + '\n'
-             */
+            
             println "param"+params
             render paginador(Producto, params.s.toInteger(), 10, 'ilike', 'categoria', params.cat) as JSON
 
@@ -183,8 +179,16 @@ class BusquedaProductosController {
             if (buscar!=0)
             render buscar as JSON
             else
-            render "No hay productos con esa caracteristica"
-        
+           // render "No hay productos con esa caracteristica en nuestro sistema"
+           // va a donde maikoll a buscarlo
+            {
+                def url = new URL("http://172.16.65.131/proyecto/servicios/api/producto/actions?criterio="+params.cat+"&pagina=17&porpagina=5")
+                def response = JSON.parse(url.newReader())
+                render response
+                // aqui deberia validar si maikoll encontro el producto o no.
+                // Si lo encuentra, debe mostrar el producto, y si no, notificar que no se mostro
+                // se debe leer el json y de alguna manera mostrar el producto obtenido
+            }
         }
     }
     
@@ -219,7 +223,34 @@ class BusquedaProductosController {
 
     }
 
-    def hello = {
-        return 'Hello!!'
+    def test = {
+        // obtener objeto request con el URL del proveedor del API
+        def url = new URL("http://localhost:7070/GrailsApplication2/rest/nombre_producto/apple/1")
+        // parsear el objeto request por json
+        def response = JSON.parse(url.newReader()) 
+        if (1 instanceof Integer) {
+            println 'Lo es!!'
+        }
+        //loop de indice = valor
+        println url
+        println response
+        response.each { key, value ->
+            println "$key = $value"
+        }
+        //render response.toString()
     }
+    
+    def consumirServicio (String consulta) {
+        //aqui URL de maikoll
+        //def url = new URL("http://172.16.65.131/proyecto/servicios/api/producto/actions?criterio="+consulta+"&pagina=17&porpagina=5")
+         def url = new URL("http://localhost:7070/GrailsApplication2/rest/nombre_producto/toshiba/1")
+         println "url.newReader()  " +url.newReader()
+         def response = JSON.parse(url.newReader())
+         
+    println "json  $response"
+    response.each { producto, id -> nombre
+            println id.link
+        }
+    }
+    
 }
